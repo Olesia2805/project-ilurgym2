@@ -1,0 +1,19 @@
+.container {
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.section {
+  padding: 24px 0;
+}
+
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1440px;
+    padding: 0 72px;
+  }
+  .section {
+    padding: 80px 0;
+  }
+}
