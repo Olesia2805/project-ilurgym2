@@ -3,7 +3,7 @@
   --white-color: #f4f4f4;
   --black-text-color: #242424;
   --text-secondary-color: rgba(244, 244, 244, 0.6);
-  --title-color: rgba(244, 244, 244, 0.4);
+  --title-color: rgba(244, 244, 244, 0.1);
   --rating-color: rgba(244, 244, 244, 0.2);
   --title-secondary-color: rgba(36, 36, 36, 0.4);
   --button-disabled-color: rgba(36, 36, 36, 0.6);
@@ -15,6 +15,7 @@
   --tran-icon: 300ms ease-in-out;
   --tran-duration: 500ms ease-in-out;
   --accent-color: #eea10c;
+  --copy-right-color: #c6cdd1;
 
   --primary-font-family: 'DM Sans', Helvetica, Arial, sans-serif;
 }

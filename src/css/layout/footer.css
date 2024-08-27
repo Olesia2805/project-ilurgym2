@@ -136,6 +136,8 @@
   font-size: 14px;
   line-height: 1.3em;
   letter-spacing: -2%;
+  color: var(--copy-right-color);
+  opacity: 0.9;
 }
 
 @media only screen and (min-width: 768px) {
@@ -187,4 +189,4 @@
   }
 }
 
-/* #end Copyright */
+/* # end Copyright */
