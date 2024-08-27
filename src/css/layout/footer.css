@@ -1,0 +1,190 @@
+.footer {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding-top: 40px;
+  padding-bottom: 10px;
+  margin-top: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .footer {
+    padding-top: 64px;
+    padding-bottom: 16px;
+  }
+}
+
+/* # Main wrapper */
+.footer-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 120px;
+}
+
+@media screen and (min-width: 768px) {
+  .footer-wrapper {
+    flex-direction: row;
+    gap: 114px;
+    margin-bottom: 64px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .footer-wrapper {
+    gap: 158px;
+    margin-bottom: 70px;
+  }
+}
+
+/* # end Main wrapper */
+
+.footer-nav-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .footer-nav-wrapper {
+    gap: 32px;
+  }
+}
+
+.footer-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .footer-title-wrapper {
+    gap: 32px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .footer-title-wrapper {
+    flex-direction: row;
+    gap: 115px;
+  }
+}
+
+/* # Title */
+.footer-title {
+  max-width: 595px;
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 1.16em;
+  letter-spacing: -2%;
+}
+
+@media screen and (min-width: 768px) {
+  .footer-title {
+    font-size: 56px;
+    line-height: 1.07em;
+  }
+}
+
+.footer-title-span {
+  font-style: italic;
+}
+
+/* # end Title */
+
+/* # Form */
+.footer-form-title {
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+@media screen and (min-width: 768px) {
+  .footer-form-title {
+    font-size: 18px;
+  }
+}
+
+.footer-form {
+  max-width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .footer-form {
+    width: 352px;
+  }
+}
+
+.footer-input {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.footer-button {
+  width: 100%;
+}
+
+/* # end Form */
+
+/* # Copyright */
+.footer-copyright {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+
+  font-size: 14px;
+  line-height: 1.3em;
+  letter-spacing: -2%;
+}
+
+@media only screen and (min-width: 768px) {
+  .footer-copyright {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 16px;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .footer-copyright {
+    padding-top: 24px;
+  }
+}
+
+.copyright-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (min-width: 768px) {
+  .copyright-wrapper {
+    flex-direction: row;
+  }
+}
+
+.copyright-text {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+  .copyright-text {
+    margin-bottom: 0;
+    margin-right: 78px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .copyright-text {
+    margin-right: 122px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .copyright-year {
+    margin-right: 308px;
+  }
+}
+
+/* #end Copyright */
