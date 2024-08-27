@@ -2,8 +2,22 @@ html {
   scroll-behavior: smooth;
 }
 
-/* body {
-} */
+body {
+  font-family: var(--primary-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--primary-color);
+  background-color: var(--white-color);
+  cursor: default;
+}
+
+svg {
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: top;
+  fill: currentColor;
+}
 
 h1,
 h2,
@@ -15,17 +29,32 @@ p {
   margin: 0;
 }
 
+p:last-child {
+  margin-bottom: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 a {
   color: currentColor;
   text-decoration: none;
 }
 
-ul {
-  list-style: none;
-  margin: 0;
-  padding-left: 0;
+button {
+  cursor: pointer;
 }
 
 img {
   display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul, ol {
+  padding: 0;
+  margin: 0;
 }
