@@ -1,0 +1,59 @@
+/* Socials links list */
+.social-icons-ul {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.social-icon-li {
+  width: 44px;
+  height: 44px;
+
+  opacity: 0.8;
+}
+
+@media only screen and (max-width: 767px) {
+  .socials {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .footer .social-icon-li {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.footer .social-icon-link,
+.menu-wrapper .social-icon-link {
+  border: 1px solid var(--title-color);
+}
+
+.social-icon-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid var(--frame-color);
+}
+
+.social-icon-link svg {
+  fill: currentColor;
+}
+
+.social-icon-link:hover,
+.social-icon-link:focus {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border: 1px solid transparent;
+  transition: all var(--tran-icon);
+}
+
+.footer .social-icon-link:hover,
+.footer .social-icon-link:focus {
+  background-color: var(--white-color);
+  color: var(--primary-color);
+  transition: all var(--tran-icon);
+}
