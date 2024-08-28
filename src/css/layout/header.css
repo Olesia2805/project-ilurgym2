@@ -3,6 +3,8 @@
   justify-content: space-between;
   align-items: center;
   background-color: var(--white-color);
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .is-scrolling {
