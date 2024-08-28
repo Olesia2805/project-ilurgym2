@@ -8,7 +8,7 @@
 }
 .quote-dynamic-block {
   display: flex;
-  background-color: #242424;
+  background-color: var(--primary-color);
   padding: 20px;
   gap: 18px;
   border-radius: 20px;
@@ -28,7 +28,7 @@
 }
 
 .icon-run {
-  color: white;
+  color: var(--white-bg-color);
   width: 18px;
   height: 20px;
 }
@@ -67,6 +67,9 @@
 
 .quote-img {
   display: block;
+  object-fit: cover;
+  width: 335px;
+  height: 242px;
   border-radius: 20px;
   margin-bottom: 20px;
 }
@@ -77,7 +80,7 @@
   gap: 16px;
   border-radius: 20px;
   max-width: 335px;
-  background-color: white;
+  background-color: var(--white-bg-color);
   height: 201px;
   overflow: hidden;
 }
@@ -94,7 +97,7 @@
 }
 
 .icon-barbell {
-  color: white;
+  color: var(--white-bg-color);
   width: 20px;
   height: 20px;
 }
@@ -103,7 +106,7 @@
   font-weight: 500;
   font-size: 20px;
   line-height: 100%;
-  color: #242424;
+  color: var(--primary-color);
   margin-bottom: 2px;
 }
 
@@ -117,7 +120,7 @@
 .daily-norm-text {
   font-size: 14px;
   line-height: 129%;
-  color: #242424;
+  color: var(--primary-color);
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -136,6 +139,7 @@
   .quote-dynamic-block,
   .daily-norm-block {
     max-width: 400px;
+    gap: 16px;
     height: 249px;
     flex-shrink: 0;
     margin-bottom: 0px;

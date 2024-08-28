@@ -6,7 +6,7 @@
 }
 .quote-dynamic-block {
   display: flex;
-  background-color: #242424;
+  background-color: var(--primary-color);
   padding: 20px;
   gap: 18px;
   border-radius: 20px;
@@ -26,7 +26,7 @@
 }
 
 .icon-run {
-  color: white;
+  color: var(--white-bg-color);
   width: 18px;
   height: 20px;
 }
@@ -80,7 +80,7 @@
   height: auto;
   border-radius: 20px;
   min-width: 335px;
-  background-color: white;
+  background-color: var(--white-bg-color);
   margin-bottom: 20px;
 }
 
@@ -105,7 +105,7 @@
   font-weight: 500;
   font-size: 20px;
   line-height: 100%;
-  color: #242424;
+  color: var(--primary-color);
   margin-bottom: 6px;
 }
 
@@ -197,7 +197,8 @@
 
   .quote-img {
     height: auto;
-    min-width: 239px;
+    width: 239px;
+    min-width: auto;
   }
 
   .quote {

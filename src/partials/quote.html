@@ -18,7 +18,7 @@
           Your body can stand almost anything. It cannot withstand a bullet.
           Your body can stand almost anything. It cannot withstand a bullet.
         </p>
-        <p class="quote-author">- Robert Schuller</p>
+        <p class="quote-author">Robert Schuller</p>
       </div>
     </div>
     <div class="daily-norm-block">
@@ -32,11 +32,20 @@
         <h4 class="daily-norm-subtitle">Daily norm of sports</h4>
       </div>
     </div>
-    <img
-      class="quote-img"
-      src="./img/quote-favorites-img.jpg"
-      srcset="./img/quote-favorites-img@2x.jpg 2x"
-      alt="quote image"
-    />
+    <picture >
+      <source
+        media="(min-width: 1280px)"
+        srcset="./img/quote-favorites-desktop.jpg, ./img/quote-favorites-desktop@2x.jpg 2x"
+      />
+      <source
+        media="(min-width: 768px)"
+        srcset="./img/quote-favorites-tablet.jpg, ./img/quote-favorites-tablet@2x.jpg 2x"
+      />
+      <img class="quote-img"
+        src="./img/quote-favorites-mobile.jpg"
+        srcset="./img/quote-favorites-mobile@2x.jpg 2x"
+        alt="quote image"
+      />
+    </picture>
   </div>
 </div>
