@@ -1,0 +1,27 @@
+.category-card {
+    display: inline-block;
+    width: 100%;
+    max-width: 200px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.category-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.category-card h3 {
+    font-size: 1.2em;
+    margin: 10px 0 5px;
+}
+
+.category-card p {
+    font-size: 0.9em;
+    color: #666;
+}
