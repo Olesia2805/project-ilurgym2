@@ -88,8 +88,8 @@
 
 @media screen and (min-width: 768px) {
   .hero-container {
-    margin-top: 100px;
-    margin-bottom: 64px;
+    padding-top: 100px;
+    padding-bottom: 64px;
     max-width: 704px;
   }
 
@@ -155,8 +155,8 @@
     flex-wrap: wrap;
     justify-content: space-between;
     max-width: 1376px;
-    margin-top: 96px;
-    margin-bottom: 0;
+    padding-top: 96px;
+    padding-bottom: 0;
   }
 
   .hero-right-side {
