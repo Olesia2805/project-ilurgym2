@@ -4,11 +4,13 @@
   --title-color: rgba(244, 244, 244, 0.1);
   --rating-color: rgba(244, 244, 244, 0.2);
   --text-secondary-color: rgba(244, 244, 244, 0.6);
+  --text-secondary-lighter-color: rgba(244, 244, 244, 0.4);
   --frame-color: rgba(36, 36, 36, 0.1);
   --title-secondary-color: rgba(36, 36, 36, 0.4);
   --button-disabled-color: rgba(36, 36, 36, 0.6);
   --icon-bg-color: rgba(36, 36, 36, 0.8);
   --modal-backdrop: rgba(4, 4, 4, 0.4);
+  --image-backgrop: rgba(17, 17, 17, 0.4);
   --white-bg-color: #fff;
   --tran-fast: 250ms ease-in-out;
   --tran-icon: 300ms ease-in-out;
