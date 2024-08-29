@@ -3,8 +3,6 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-top: 20px;
-  padding-bottom: 20px;
 }
 .quote-dynamic-block {
   display: flex;
@@ -67,37 +65,38 @@
 
 .quote-img {
   display: block;
-  object-fit: cover;
-  width: 335px;
-  height: 242px;
   border-radius: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
+  height: 119px;
+  object-fit: cover;
+  min-width: 335px;
 }
 
 .daily-norm-block {
   display: flex;
   padding: 20px;
-  gap: 16px;
+  flex-direction: column;
+  gap: 15px;
+  height: auto;
   border-radius: 20px;
-  max-width: 335px;
+  min-width: 335px;
   background-color: var(--white-bg-color);
-  height: 201px;
-  overflow: hidden;
+  margin-bottom: 20px;
 }
 
 .icon-barbell-wrapper {
-  width: 34px;
-  height: 32px;
+  width: 20px;
+  height: 20px;
   border-radius: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  background-color: black;
+  background-color: transparent;
 }
 
 .icon-barbell {
-  color: var(--white-bg-color);
+  color: black;
   width: 20px;
   height: 20px;
 }
@@ -107,25 +106,14 @@
   font-size: 20px;
   line-height: 100%;
   color: var(--primary-color);
-  margin-bottom: 2px;
+  margin-bottom: 6px;
 }
 
 .daily-norm-subtitle {
   font-size: 14px;
   line-height: 129%;
   color: rgba(36, 36, 36, 0.6);
-  margin-bottom: 16px;
-}
-
-.daily-norm-text {
-  font-size: 14px;
-  line-height: 129%;
-  color: var(--primary-color);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
+  margin-bottom: 0px;
 }
 
 @media (min-width: 768px) {
@@ -136,21 +124,26 @@
     flex-wrap: wrap;
     gap: 16px;
   }
-  .quote-dynamic-block,
+  .quote-dynamic-block {
+    max-width: 704px;
+    padding: 40px;
+    margin-bottom: 0px;
+    height: auto;
+  }
   .daily-norm-block {
-    max-width: 400px;
-    gap: 16px;
-    height: 249px;
+    min-width: 344px;
+    height: auto;
     flex-shrink: 0;
     margin-bottom: 0px;
-    padding: 40px;
+    padding: 25px;
   }
 
   .quote-img {
     object-fit: cover;
-    height: 249px;
+    height: 141px;
     margin-bottom: 0px;
-    max-width: 288px;
+    max-width: none;
+    min-width: 344px;
   }
   .icon-run-wrapper {
     width: 34px;
@@ -187,37 +180,28 @@
   }
 
   .daily-norm-subtitle {
-    margin-bottom: 20px;
+    margin-bottom: 0px;
   }
+
 }
 
 @media (min-width: 1280px) {
-  .quote-section-wrapper {
-    flex-direction: column;
-    justify-content: flex-start;
-    flex-wrap: nowrap;
-    gap: 32px;
+  .quote-dynamic-block {
+    max-width: 494px;
   }
-  .quote-dynamic-block,
+
   .daily-norm-block {
-    max-width: 444px;
+    min-width: 239px;
     height: auto;
   }
 
   .quote-img {
-    height: 242px;
-    min-width: 444px;
+    height: auto;
+    width: 239px;
+    min-width: auto;
   }
 
   .quote {
     margin-bottom: 8px;
-  }
-
-  .daily-norm-text {
-    overflow: visible;
-    text-overflow: unset;
-    display: block;
-    -webkit-line-clamp: unset;
-    -webkit-box-orient: unset;
   }
 }
