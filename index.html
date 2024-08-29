@@ -4,13 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Your Energy</title>
-    <script type="module" crossorigin src="/project-ilurgym2/assets/main-R6HPTmyg.js"></script>
-    <link rel="stylesheet" crossorigin href="/project-ilurgym2/assets/main-BcWwPQ6P.css">
+    <script type="module" crossorigin src="/project-ilurgym2/assets/main-DLle6qQl.js"></script>
+    <link rel="stylesheet" crossorigin href="/project-ilurgym2/assets/main-G3TKfasj.css">
   </head>
   <body class="body">
     <header class="header js-header">
   <div class="container header-container">
-    <a class="logo on-hover js-logo" href="./index.html" aria-label="your energy logo">
+    <a
+      class="logo on-hover js-logo"
+      href="./index.html"
+      aria-label="your energy logo"
+    >
       <svg class="main-logo">
         <use href="/project-ilurgym2/assets/main-logo-1t1ruA9Q.svg#main-logo"></use>
       </svg>
@@ -33,9 +37,9 @@
           target="_blank"
           class="header-social-link"
         >
-        <svg class="header-social-icon" width="28" height="28">
-          <use href="/project-ilurgym2/assets/icons-BUPRkBTg.svg#icon-facebook"></use>
-        </svg>
+          <svg class="header-social-icon" width="28" height="28">
+            <use href="/project-ilurgym2/assets/icons-BUPRkBTg.svg#icon-facebook"></use>
+          </svg>
         </a>
       </li>
       <li class="header-social-item">
@@ -44,9 +48,9 @@
           target="_blank"
           class="header-social-link"
         >
-        <svg class="header-social-icon" width="28" height="28">
-          <use href="/project-ilurgym2/assets/icons-BUPRkBTg.svg#icon-instagram"></use>
-        </svg>
+          <svg class="header-social-icon" width="28" height="28">
+            <use href="/project-ilurgym2/assets/icons-BUPRkBTg.svg#icon-instagram"></use>
+          </svg>
         </a>
       </li>
       <li class="header-social-item">
@@ -55,14 +59,19 @@
           target="_blank"
           class="header-social-link"
         >
-        <svg class="header-social-icon" width="28" height="28">
-          <use href="/project-ilurgym2/assets/icons-BUPRkBTg.svg#icon-youtube"></use>
-        </svg>
+          <svg class="header-social-icon" width="28" height="28">
+            <use href="/project-ilurgym2/assets/icons-BUPRkBTg.svg#icon-youtube"></use>
+          </svg>
         </a>
       </li>
     </ul>
-    <button class="header-btn js-header-btn">
-      <svg class="header-btn-icon" width="32" height="32">
+    <button
+      aria-label="Toggle Menu Button"
+      class="menu-toggle js-open-menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg class="mobile-menu-icon" width="32" height="32">
         <use href="/project-ilurgym2/assets/icons-BUPRkBTg.svg#icon-burger"></use>
       </svg>
     </button>
@@ -293,6 +302,69 @@
     </div>
   </div>
 </footer>
+
+    <div class="menu-container js-menu-container" id="mobile-menu">
+  <button
+    aria-label="Menu Toggle"
+    type="button"
+    class="menu-toggle js-close-menu"
+  >
+    <svg class="icon-close">
+      <use href="/project-ilurgym2/assets/icons-BUPRkBTg.svg#icon-close"></use>
+    </svg>
+  </button>
+  <div class="mobile-menu-container">
+    <ul class="mobile-menu">
+      <li class="mobile-menu-item">
+        <a aria-label="Home" class="mobile-menu-link" href="index.html">Home</a>
+      </li>
+      <li class="mobile-menu-item">
+        <a aria-label="Favorites" class="mobile-menu-link" href="favorites.html"
+          >Favorites</a
+        >
+      </li>
+    </ul>
+  </div>
+  <ul class="social-icons-ul list">
+  <li class="social-icon-li">
+    <a
+      class="social-icon-link"
+      href="https://www.facebook.com//goITclub"
+      aria-label="Go to our facebook page"
+      target="_blank"
+    >
+      <svg class="social-icon" width="40" height="40">
+        <use href="/project-ilurgym2/assets/icons-BUPRkBTg.svg#icon-facebook"></use>
+      </svg>
+    </a>
+  </li>
+  <li class="social-icon-li">
+    <a
+      class="social-icon-link"
+      href="https://www.instagram.com/goitclub"
+      aria-label="Go to our instagram page"
+      target="_blank"
+    >
+      <svg class="social-icon" width="40" height="40">
+        <use href="/project-ilurgym2/assets/icons-BUPRkBTg.svg#icon-instagram"></use>
+      </svg>
+    </a>
+  </li>
+  <li class="social-icon-li">
+    <a
+      class="social-icon-link"
+      href="https://www.youtube.com/GoIT"
+      aria-label="Go to our youtube page"
+      target="_blank"
+    >
+      <svg class="social-icon" width="40" height="40">
+        <use href="/project-ilurgym2/assets/icons-BUPRkBTg.svg#icon-youtube"></use>
+      </svg>
+    </a>
+  </li>
+</ul>
+
+</div>
 
   </body>
 </html>
