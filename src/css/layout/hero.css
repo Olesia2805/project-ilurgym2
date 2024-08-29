@@ -1,5 +1,6 @@
 .hero {
   padding-top: 80px;
+  padding-bottom: 40px;
 }
 
 .hero-title-container {
@@ -87,6 +88,7 @@
 @media screen and (min-width: 768px) {
   .hero {
     padding-top: 100px;
+    padding-bottom: 64px;
   }
 
   .sun-img {
