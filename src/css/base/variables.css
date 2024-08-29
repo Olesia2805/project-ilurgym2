@@ -6,7 +6,7 @@
   --text-secondary-color: rgba(244, 244, 244, 0.6);
   --frame-color: rgba(36, 36, 36, 0.1);
   --title-secondary-color: rgba(36, 36, 36, 0.4);
-  --button-disabled-color: rgba(36, 36, 36, 0.6);
+  --text-tertiary-color: rgba(36, 36, 36, 0.6);
   --icon-bg-color: rgba(36, 36, 36, 0.8);
   --modal-backdrop: rgba(4, 4, 4, 0.4);
   --white-bg-color: #fff;
@@ -15,9 +15,7 @@
   --tran-duration: 500ms ease-in-out;
   --accent-color: #eea10c;
   --copy-right-color: #c6cdd1;
+  --block-bg-color: rgba(86, 85, 85, 0.8);
 
   --primary-font-family: 'DM Sans', Helvetica, Arial, sans-serif;
 }
-
-/* rgba(86, 85, 85, 0.8); */
-/* --button-disabled-color: rgba(36, 36, 36, 0.6); */
