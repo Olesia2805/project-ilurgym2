@@ -1,17 +1,20 @@
 async function fetchQuote() {
   try {
-      const response = await fetch('https://your-energy.b.goit.study/api/quote');
-      const data = await response.json();
-      return data;
+    const response = await fetch('https://your-energy.b.goit.study/api/quote');
+    const data = await response.json();
+    return data;
   } catch (error) {
-      console.error('Error fetching the quote:', error);
-      return null;
+    console.error('Error fetching the quote:', error);
+    return null;
   }
 }
 
 function saveQuoteToLocalStorage(quote) {
   const currentDate = new Date().toISOString().split('T')[0];
-  localStorage.setItem('dailyQuote', JSON.stringify({ quote, date: currentDate }));
+  localStorage.setItem(
+    'dailyQuote',
+    JSON.stringify({ quote, date: currentDate })
+  );
 }
 
 function getSavedQuote() {
@@ -24,26 +27,25 @@ async function getDailyQuote() {
   const currentDate = new Date().toISOString().split('T')[0];
 
   if (savedQuote && savedQuote.date === currentDate) {
-      return savedQuote.quote;
+    return savedQuote.quote;
   } else {
-      const newQuote = await fetchQuote();
-      if (newQuote) {
-          saveQuoteToLocalStorage(newQuote);
-          return newQuote;
-      } else {
-          return savedQuote ? savedQuote.quote : null;
-      }
+    const newQuote = await fetchQuote();
+    if (newQuote) {
+      saveQuoteToLocalStorage(newQuote);
+      return newQuote;
+    } else {
+      return savedQuote ? savedQuote.quote : null;
+    }
   }
 }
 
 async function displayQuote() {
   const dailyQuote = await getDailyQuote();
   if (dailyQuote) {
-      const quoteText = dailyQuote.quote; // Assuming the API returns the quote text in `quote`
-      const quoteAuthor = dailyQuote.author; // Assuming the API returns the author in `author`
-      // Update the HTML elements
-      document.querySelector('.quote').textContent = quoteText;
-      document.querySelector('.quote-author').textContent = quoteAuthor;
+    const quoteText = dailyQuote.quote;
+    const quoteAuthor = dailyQuote.author;
+    document.querySelector('.quote').textContent = quoteText;
+    document.querySelector('.quote-author').textContent = quoteAuthor;
   }
 }
 
