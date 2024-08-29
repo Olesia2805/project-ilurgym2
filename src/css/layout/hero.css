@@ -3,8 +3,9 @@
 }
 
 .hero-container {
-  margin-top: 80px;
-  margin-bottom: 40px;
+  padding-top: 80px;
+  padding-bottom: 40px;
+  margin: 0 auto;
   max-width: 335px;
 }
 
@@ -63,7 +64,7 @@
 
 .hashtag-block-list {
   display: flex;
-  justify-content: space-between;
+  gap: 8px;
 }
 
 .hashtag-block-item {
@@ -99,7 +100,7 @@
   }
 
   .icon-sun-svg {
-    top: 8px;
+    top: 6px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -150,7 +151,7 @@
     justify-content: space-between;
     max-width: 1376px;
     margin-top: 96px;
-    margin-bottom: 64px;
+    margin-bottom: 0;
   }
 
   .hero-right-side {
@@ -189,14 +190,14 @@
 
   .hashtag-block {
     position: absolute;
-    top: 132px;
+    top: 212px;
     right: 0px;
   }
 
   .hashtag-block-list {
     display: flex;
     flex-wrap: wrap;
-    max-width: 197px;
+    max-width: 200px;
     max-height: 80px;
   }
 
