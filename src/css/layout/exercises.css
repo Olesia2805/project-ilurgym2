@@ -3,7 +3,6 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-top: 20px;
   padding-bottom: 20px;
 }
 .quote-dynamic-block {
@@ -14,6 +13,12 @@
   border-radius: 20px;
   margin-bottom: 20px;
   max-width: 335px;
+}
+
+.quote-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .icon-run-wrapper {
@@ -63,6 +68,8 @@
   font-size: 14px;
   line-height: 129%;
   color: var(--white-color);
+  display: block;
+  margin-top: auto;
 }
 
 .quote-img {
@@ -138,7 +145,7 @@
   }
   .quote-dynamic-block,
   .daily-norm-block {
-    max-width: 400px;
+    min-width: 400px;
     gap: 16px;
     height: 249px;
     flex-shrink: 0;
@@ -200,7 +207,7 @@
   }
   .quote-dynamic-block,
   .daily-norm-block {
-    max-width: 444px;
+    min-width: 444px;
     height: auto;
   }
 
