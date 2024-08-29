@@ -40,10 +40,11 @@
 }
 
 .mobile-menu-container {
-  flex: 1;
+  /* flex: 1; */
+  height: 40vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
 }
 
