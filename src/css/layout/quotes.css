@@ -47,20 +47,20 @@
   font-weight: 500;
   font-size: 20px;
   line-height: 100%;
-  color: #f4f4f4;
+  color: var(--white-color);
 }
 
 .quote {
   font-size: 14px;
   line-height: 129%;
-  color: rgba(244, 244, 244, 0.6);
+  color: var(--text-secondary-color);
   margin-bottom: 16px;
 }
 
 .quote-author {
   font-size: 14px;
   line-height: 129%;
-  color: #f4f4f4;
+  color: var(--white-color);
 }
 
 .quote-img {
@@ -96,7 +96,7 @@
 }
 
 .icon-barbell {
-  color: black;
+  color: var(--primary-color);
   width: 20px;
   height: 20px;
 }
@@ -112,7 +112,7 @@
 .daily-norm-subtitle {
   font-size: 14px;
   line-height: 129%;
-  color: rgba(36, 36, 36, 0.6);
+  color: var(--button-disabled-color);
   margin-bottom: 0px;
 }
 
@@ -171,7 +171,7 @@
   .quote-author {
     font-size: 16px;
     line-height: 150%;
-    color: #f4f4f4;
+    color: var(--white-color);
   }
 
   .daily-norm-title {
@@ -182,7 +182,6 @@
   .daily-norm-subtitle {
     margin-bottom: 0px;
   }
-
 }
 
 @media (min-width: 1280px) {
