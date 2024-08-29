@@ -37,11 +37,8 @@ formEl.addEventListener('submit', event => {
       position: 'bottomRight',
       timeout: 5000,
     });
-
     localStorage.removeItem('subscribe-form-email');
     event.target.reset();
     formData.email = '';
-  } else {
-    alert('Fill please all fields');
   }
 });
