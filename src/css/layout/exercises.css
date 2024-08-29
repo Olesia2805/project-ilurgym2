@@ -16,6 +16,12 @@
   max-width: 335px;
 }
 
+.quote-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 .icon-run-wrapper {
   width: 32px;
   height: 32px;
@@ -63,6 +69,8 @@
   font-size: 14px;
   line-height: 129%;
   color: var(--white-color);
+  display: block;
+  margin-top: auto;
 }
 
 .quote-img {
