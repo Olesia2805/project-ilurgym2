@@ -38,11 +38,9 @@ async function getDailyQuote() {
 
 async function displayQuote() {
   const dailyQuote = await getDailyQuote();
-  
   if (dailyQuote) {
       const quoteText = dailyQuote.quote; // Assuming the API returns the quote text in `quote`
       const quoteAuthor = dailyQuote.author; // Assuming the API returns the author in `author`
-
       // Update the HTML elements
       document.querySelector('.quote').textContent = quoteText;
       document.querySelector('.quote-author').textContent = quoteAuthor;
