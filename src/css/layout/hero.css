@@ -12,6 +12,7 @@
 .hero-text-block {
   display: flex;
   position: relative;
+  text-indent: 44px;
 }
 
 .hero-text-block-title {
@@ -90,6 +91,10 @@
     margin-top: 100px;
     margin-bottom: 64px;
     max-width: 704px;
+  }
+
+  .hero-text-block {
+    text-indent: 80px;
   }
 
   .hero-text-block-title {
