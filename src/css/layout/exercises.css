@@ -138,7 +138,7 @@
   }
   .quote-dynamic-block,
   .daily-norm-block {
-    max-width: 400px;
+    min-width: 400px;
     gap: 16px;
     height: 249px;
     flex-shrink: 0;
@@ -200,7 +200,7 @@
   }
   .quote-dynamic-block,
   .daily-norm-block {
-    max-width: 444px;
+    min-width: 444px;
     height: auto;
   }
 
