@@ -7,8 +7,10 @@
 @import url(layout/header.css);
 @import url(layout/modal.css);
 @import url(layout/hero.css);
+@import url(layout/exercises-home.css);
 @import url(layout/exercises.css);
 @import url(layout/footer.css);
 @import url(layout/socials.css);
 @import url(layout/ui-elements.css);
 @import url(layout/mobile-menu.css);
+@import url(components/category-card.css);
