@@ -11,9 +11,9 @@
       rel="stylesheet"
     />
     <script type="module" crossorigin src="/project-ilurgym2/assets/vendor-I1I71QQ2.js"></script>
-    <script type="module" crossorigin src="/project-ilurgym2/assets/main-C1UIXWbJ.js"></script>
+    <script type="module" crossorigin src="/project-ilurgym2/assets/main-dDW8EnJD.js"></script>
     <link rel="stylesheet" crossorigin href="/project-ilurgym2/assets/vendor-DnveWo0P.css">
-    <link rel="stylesheet" crossorigin href="/project-ilurgym2/assets/main-KfXqymh7.css">
+    <link rel="stylesheet" crossorigin href="/project-ilurgym2/assets/main-Dza4haAZ.css">
   </head>
   <body class="body">
     <header class="header js-header">
@@ -154,204 +154,92 @@
   </div>
 </section>
 
-      <!-- Права колонка з фільтрами та вправами -->
-<div class="container filters-exercises-wrapper">
-    <!-- Панель фільтрів -->
-    <div class="filters-section">
-      <div class="filters-search-wrapper">
-        <!-- Поле для пошуку вправ -->
-        <form id="search-form" class="search-form">
-            <input type="text" id="search-input" placeholder="Search" />
-            <button type="submit">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001a1 1 0 0 0 .197.216l3.85 3.85a1 1 0 0 0 1.415-1.415l-3.85-3.85a1 1 0 0 0-.216-.197zm-5.44-6.09a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11z"/>
-              </svg>
-            </button>
-          </form>
-          
-        <!-- Панель фільтрів -->
-        <div class="filter-panel">
-          <div class="filters">
-            <button class="filter-btn active" data-filter="Muscles">Muscles</button>
-            <button class="filter-btn" data-filter="Body parts">Body parts</button>
-            <button class="filter-btn" data-filter="Equipment">Equipment</button>
-          </div>
-        </div>
-      </div>
-    </div>
       <div class="container exercises-container">
+  <div class="filters-wrapper">
+  <h2 class="exercises-header">Exercises<!-- / <span class="exercises-subcategory">Waist</span> --></h2>
+  <form id="search-form" class="search-bar">
+    <input type="text" id="search-input" name="search" placeholder="Search" />
+    <button type="submit">
+      <svg class="icon-search">
+        <use href="/project-ilurgym2/assets/icons-BUPRkBTg.svg#icon-search"></use>
+      </svg>
+    </button>
+  </form>
+  <div class="filters">
+    <button class="filter-btn active" data-filter="Muscles">Muscles</button>
+    <button class="filter-btn" data-filter="Body parts">Body parts</button>
+    <button class="filter-btn" data-filter="Equipment">Equipment</button>
+  </div>
+</div>
   <div class="content-wrapper">
-    <!-- Ліва колонка з цитатами -->
     <div class="quote-section-wrapper">
-      <div class="quote-dynamic-block">
-        <div class="icon-run-wrapper">
-          <svg class="icon-run">
-            <use href="/project-ilurgym2/assets/icons-BUPRkBTg.svg#icon-run"></use>
-          </svg>
-        </div>
-        <div class="quote-content">
-          <div class="quote-title-wrapper">
-            <h3 class="quote-title">Quote of the day</h3>
-            <svg class="icon-quote">
-              <use href="/project-ilurgym2/assets/icons-BUPRkBTg.svg#icon-quote"></use>
-            </svg>
-          </div>
-          <p class="quote"></p>
-          <p class="quote-author"></p>
-        </div>
+  <div class="quote-dynamic-block">
+    <div class="icon-run-wrapper">
+      <svg class="icon-run">
+        <use href="/project-ilurgym2/assets/icons-BUPRkBTg.svg#icon-run"></use>
+      </svg>
+    </div>
+    <div class="quote-content">
+      <div class="quote-title-wrapper">
+        <h3 class="quote-title">Quote of the day</h3>
+        <svg class="icon-quote">
+          <use href="/project-ilurgym2/assets/icons-BUPRkBTg.svg#icon-quote"></use>
+        </svg>
       </div>
-      <picture>
-        <source
-          media="(min-width: 1280px)"
-          srcset="/project-ilurgym2/assets/quote-main-img-B7opyVOs.jpg, /project-ilurgym2/assets/quote-main-img@2x-B_rtpS_H.jpg 2x"
-        />
-        <source
-          media="(min-width: 768px)"
-          srcset="/project-ilurgym2/assets/quote-main-tablet-DZ-KukMl.jpg, /project-ilurgym2/assets/quote-main-tablet@2x-CmKDk0VD.jpg 2x"
-        />
-        <img
-          class="quote-img"
-          src="/project-ilurgym2/assets/quote-main-mobile-CkHA9TYM.jpg"
-          srcset="/project-ilurgym2/assets/quote-main-mobile@2x-DTWzr9KY.jpg 2x"
-          alt="quote image"
-        />
-      </picture>
-      <div class="daily-norm-block">
-        <div class="icon-barbell-wrapper">
-          <svg class="icon-barbell">
-            <use href="/project-ilurgym2/assets/icons-BUPRkBTg.svg#icon-barbell"></use>
-          </svg>
-        </div>
-        <div class="daily-norm-content">
-          <h3 class="daily-norm-title">110 min</h3>
-          <h4 class="daily-norm-subtitle">Daily norm of sports</h4>
-          <p class="daily-norm-text">
-            The World Health Organization recommends at least 150 minutes of
-            moderate-intensity aerobic physical activity throughout the week for
-            adults aged 18-64. However, what happens if we adjust that number to
-            110 minutes every day? While it might seem like a high number to
-            hit, dedicating 110 minutes daily to sporting activities may offer
-            unparalleled benefits to physical health, mental well-being, and
-            overall quality of life.
-          </p>
-        </div>
+      <p class="quote"></p>
+      <p class="quote-author"></p>
+    </div>
+  </div>
+  <picture>
+    <source
+      media="(min-width: 1280px)"
+      srcset="/project-ilurgym2/assets/quote-main-img-B7opyVOs.jpg, /project-ilurgym2/assets/quote-main-img@2x-B_rtpS_H.jpg 2x"
+    />
+    <source
+      media="(min-width: 768px)"
+      srcset="/project-ilurgym2/assets/quote-main-tablet-DZ-KukMl.jpg, /project-ilurgym2/assets/quote-main-tablet@2x-CmKDk0VD.jpg 2x"
+    />
+    <img
+      class="quote-img"
+      src="/project-ilurgym2/assets/quote-main-mobile-CkHA9TYM.jpg"
+      srcset="/project-ilurgym2/assets/quote-main-mobile@2x-DTWzr9KY.jpg 2x"
+      alt="quote image"
+    />
+  </picture>
+  <div class="daily-norm-block">
+    <div class="icon-barbell-wrapper">
+      <svg class="icon-barbell">
+        <use href="/project-ilurgym2/assets/icons-BUPRkBTg.svg#icon-barbell"></use>
+      </svg>
+    </div>
+    <div class="daily-norm-content">
+      <h3 class="daily-norm-title">110 min</h3>
+      <h4 class="daily-norm-subtitle">Daily norm of sports</h4>
+      <p class="daily-norm-text">
+        The World Health Organization recommends at least 150 minutes of
+        moderate-intensity aerobic physical activity throughout the week for
+        adults aged 18-64. However, what happens if we adjust that number to
+        110 minutes every day? While it might seem like a high number to
+        hit, dedicating 110 minutes daily to sporting activities may offer
+        unparalleled benefits to physical health, mental well-being, and
+        overall quality of life.
+      </p>
+    </div>
+  </div>
+</div>
+    <div class="exercises-wrapper">
+      <div class="category-container exercises-grid"></div>
+      <div class="exercise-container exercises-grid"></div>
+      <div class="pagination" id="pagination">
+        <span class="page current">1</span>
+        <span class="page">2</span>
+        <span class="page">3</span>
       </div>
     </div>
-    <!-- <div class="exercises-grid">
-  <div class="category-card">
-    <img
-      src="https://ftp.goit.study/img/power-pulse/filters/abs_bdi0dw.jpg"
-      alt="Abductors"
-      width="290"
-      height="242"
-    />
-    <h3>Abductors</h3>
-    <p>Muscles</p>
   </div>
-  <div class="category-card">
-    <img
-      src="https://ftp.goit.study/img/power-pulse/filters/abs_bdi0dw.jpg"
-      alt="Abductors"
-      width="290"
-      height="242"
-    />
-    <h3>Abductors</h3>
-    <p>Muscles</p>
-  </div>
-  <div class="category-card">
-    <img
-      src="https://ftp.goit.study/img/power-pulse/filters/abs_bdi0dw.jpg"
-      alt="Abductors"
-      width="290"
-      height="242"
-    />
-    <h3>Abductors</h3>
-    <p>Muscles</p>
-  </div>
-  <div class="category-card">
-    <img
-      src="https://ftp.goit.study/img/power-pulse/filters/abs_bdi0dw.jpg"
-      alt="Abductors"
-      width="290"
-      height="242"
-    />
-    <h3>Abductors</h3>
-    <p>Muscles</p>
-  </div>
-  <div class="category-card">
-    <img
-      src="https://ftp.goit.study/img/power-pulse/filters/abs_bdi0dw.jpg"
-      alt="Abductors"
-      width="290"
-      height="242"
-    />
-    <h3>Abductors</h3>
-    <p>Muscles</p>
-  </div>
-</div>
- -->
-    <!-- Контейнер для відображення категорій -->
-    <div class="category-container exercises-grid"></div>
-    <!-- Контейнер для відображення вправ -->
-    <div class="exercise-container"></div>
-  </div>
-  <div class="exercises-grid">
-  <div class="category-card">
-    <img
-      src="https://ftp.goit.study/img/power-pulse/filters/abs_bdi0dw.jpg"
-      alt="Abductors"
-      width="290"
-      height="242"
-    />
-    <h3>Abductors</h3>
-    <p>Muscles</p>
-  </div>
-  <div class="category-card">
-    <img
-      src="https://ftp.goit.study/img/power-pulse/filters/abs_bdi0dw.jpg"
-      alt="Abductors"
-      width="290"
-      height="242"
-    />
-    <h3>Abductors</h3>
-    <p>Muscles</p>
-  </div>
-  <div class="category-card">
-    <img
-      src="https://ftp.goit.study/img/power-pulse/filters/abs_bdi0dw.jpg"
-      alt="Abductors"
-      width="290"
-      height="242"
-    />
-    <h3>Abductors</h3>
-    <p>Muscles</p>
-  </div>
-  <div class="category-card">
-    <img
-      src="https://ftp.goit.study/img/power-pulse/filters/abs_bdi0dw.jpg"
-      alt="Abductors"
-      width="290"
-      height="242"
-    />
-    <h3>Abductors</h3>
-    <p>Muscles</p>
-  </div>
-  <div class="category-card">
-    <img
-      src="https://ftp.goit.study/img/power-pulse/filters/abs_bdi0dw.jpg"
-      alt="Abductors"
-      width="290"
-      height="242"
-    />
-    <h3>Abductors</h3>
-    <p>Muscles</p>
-  </div>
-</div>
-
 </div>
 
       <div id="content"></div>
-      <div id="pagination"></div>
     </main>
     <footer class="footer">
   <div class="container">
