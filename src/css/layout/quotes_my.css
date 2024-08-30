@@ -1,8 +1,15 @@
+/* Ліва колонка з цитатами */
+.quote-section-wrapper {
+  flex: 1; /* Вказує, що ця колонка займатиме одну частину ширини */
+  margin-right: 20px; /* Відступ справа для розділення колонок */
+}
+
 .quote-section-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding-bottom: 20px;
 }
 .quote-dynamic-block {
   display: flex;
@@ -14,12 +21,6 @@
   max-width: 335px;
 }
 
-.quote-content {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-
 .icon-run-wrapper {
   width: 32px;
   height: 32px;
@@ -28,7 +29,7 @@
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  background-color: var(--block-bg-color);
+  background-color: rgba(86, 85, 85, 0.8);
 }
 
 .icon-run {
@@ -39,22 +40,34 @@
 
 .quote-title-wrapper {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  margin-bottom: 8px;
 }
 
-/* Права колонка з фільтрами та вправами */
-.filters-exercises-wrapper {
-  flex: 2; /* Вказує, що ця колонка займатиме дві частини ширини */
-  display: flex;
-  flex-direction: column;
+.icon-quote {
+  width: 20px;
+  height: 20px;
+}
+
+.quote-title {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 100%;
+  color: var(--white-color);
+}
+
+.quote {
+  font-size: 14px;
+  line-height: 129%;
+  color: var(--text-secondary-color);
+  margin-bottom: 16px;
 }
 
 .quote-author {
   font-size: 14px;
   line-height: 129%;
   color: var(--white-color);
-  display: block;
-  margin-top: auto;
 }
 
 .quote-img {
@@ -66,9 +79,21 @@
   margin-bottom: 20px;
 }
 
-/* Загальний контейнер для карток */
-.category-container,
-.exercise-container {
+.daily-norm-block {
+  display: flex;
+  padding: 20px;
+  gap: 16px;
+  border-radius: 20px;
+  max-width: 335px;
+  background-color: var(--white-bg-color);
+  height: 201px;
+  overflow: hidden;
+}
+
+.icon-barbell-wrapper {
+  width: 34px;
+  height: 32px;
+  border-radius: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -93,7 +118,7 @@
 .daily-norm-subtitle {
   font-size: 14px;
   line-height: 129%;
-  color: var(--text-tertiary-color);
+  color: var(--button-disabled-color);
   margin-bottom: 16px;
 }
 
@@ -118,7 +143,7 @@
   }
   .quote-dynamic-block,
   .daily-norm-block {
-    min-width: 400px;
+    max-width: 400px;
     gap: 16px;
     height: 249px;
     flex-shrink: 0;
@@ -180,7 +205,7 @@
   }
   .quote-dynamic-block,
   .daily-norm-block {
-    min-width: 444px;
+    max-width: 444px;
     height: auto;
   }
 

@@ -1,154 +1,151 @@
-
-
 .modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    position: fixed;
-    width: 100%;
-    height: 100vh;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
 
-    background-color: rgba(0, 0, 0, 0.247);
-    z-index: 10;
+  background-color: rgba(0, 0, 0, 0.247);
+  z-index: 10;
 
-    color: #F4F4F4;
+  color: #f4f4f4;
 }
 
-
 .modal__block {
-    background-color: #242424;
-    width: 704px;
-    height: 486px;
-    border-radius: 20px;
+  background-color: #242424;
+  width: 704px;
+  height: 486px;
+  border-radius: 20px;
 
-    display: flex;
-    justify-content: space-between;
-    padding: 32px;
+  display: flex;
+  justify-content: space-between;
+  padding: 32px;
 
-    position: relative;
+  position: relative;
 }
 
 .modal__img {
-    display: flex;
+  display: flex;
 }
 
 .modal__img > img {
-    width: 270px;
-    height: 259px;
-    border-radius: 12px;
+  width: 270px;
+  height: 259px;
+  border-radius: 12px;
 }
 
 .modal__content {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    width: 338px;
-    height: 100%;
+  width: 338px;
+  height: 100%;
 }
 
 .modal__content h2 {
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 32px;
-    margin-bottom: 10px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  margin-bottom: 10px;
 }
 
 .modal__exit {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    font-size: 28px;
-    cursor: pointer;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 28px;
+  cursor: pointer;
 }
 
 .modal__rating {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 .modal__rating span:nth-child(1) {
-    font-size: 12px;
-    line-height: 18px;
-    font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 400;
 }
 
 .modal__rating_yellow {
-    color: #EEA10C;
-    font-size: 18ox;
+  color: #eea10c;
+  font-size: 18ox;
 }
 
 .modal__rating_grey {
-    color: #F4F4F433;
-    font-size: 18ox;
+  color: #f4f4f433;
+  font-size: 18ox;
 }
 
 .modal__info {
-    padding: 8px 0px;
-    border-top: 1px solid #F4F4F433;
-    border-bottom: 1px solid #F4F4F433;
+  padding: 8px 0px;
+  border-top: 1px solid #f4f4f433;
+  border-bottom: 1px solid #f4f4f433;
 
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 .modal__info > div {
-    margin-right: 16px;
+  margin-right: 16px;
 }
 
-.modal__info > div:nth-child(-n+4) {
-    margin-bottom: 16px;
+.modal__info > div:nth-child(-n + 4) {
+  margin-bottom: 16px;
 }
 
 .modal__info > div > div:nth-child(1) {
-    color: #F4F4F466;
-    font-size: 12px;
-    font-weight: 400px;
-    line-height: 18px;
-    margin-bottom: 4px;
+  color: #f4f4f466;
+  font-size: 12px;
+  font-weight: 400px;
+  line-height: 18px;
+  margin-bottom: 4px;
 }
 
 .modal__info > div > div:nth-child(2) {
-    font-size: 14px;
-    font-family: 500;
-    line-height: 18px;
+  font-size: 14px;
+  font-family: 500;
+  line-height: 18px;
 }
 
 .modal__description {
-    color: #F4F4F499;
-    font-size: 14px;
-    font-weight: 400px;
-    line-height: 18px;
+  color: #f4f4f499;
+  font-size: 14px;
+  font-weight: 400px;
+  line-height: 18px;
 }
 
 .modal__btns {
-    margin-top: auto;
-    display: flex;
-    justify-content: flex-end;
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .modal__btns button {
-    border-radius: 30px;
-    font-weight: 400;
-    padding: 12px 24px 12px 24px;
-    font-size: 15px;
-    line-height: 24px;
+  border-radius: 30px;
+  font-weight: 400;
+  padding: 12px 24px 12px 24px;
+  font-size: 15px;
+  line-height: 24px;
 }
 
 .modal__btns button:nth-child(1) {
-    background-color: #F4F4F4;
-    color: #242424;
-    border: none;
+  background-color: #f4f4f4;
+  color: #242424;
+  border: none;
 }
 
 .fa-heart {
-    margin-left: 5px;
+  margin-left: 5px;
 }
 
 .modal__btns button:nth-child(2) {
-    margin-left: 6px;
-    border: 1px solid #F4F4F4;
-    background-color: #242424;
-    color: #F4F4F4
+  margin-left: 6px;
+  border: 1px solid #f4f4f4;
+  background-color: #242424;
+  color: #f4f4f4;
 }

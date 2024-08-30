@@ -4,6 +4,7 @@
 @import url(base/variables.css);
 @import url(base/common.css);
 @import url(base/container.css);
+
 @import url(layout/header.css);
 @import url(layout/modal.css);
 @import url(layout/hero.css);
@@ -12,5 +13,12 @@
 @import url(layout/footer.css);
 @import url(layout/socials.css);
 @import url(layout/ui-elements.css);
-@import url(layout/mobile-menu.css);
+@import url(layout/filters.css);
+@import url(layout/search.css);
+@import url(layout/categories.css);
+/* @import url(layout/quotes.css); */
+@import url(layout/quotes_my.css);
+
 @import url(components/category-card.css);
+
+@import url(layout/mobile-menu.css);
