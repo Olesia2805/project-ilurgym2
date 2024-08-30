@@ -1,3 +1,13 @@
+.exercises-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 28px;
+  line-height: 136%;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+}
+
 .quote-section-wrapper {
   display: flex;
   justify-content: center;
@@ -43,11 +53,7 @@
 }
 
 /* Права колонка з фільтрами та вправами */
-.filters-exercises-wrapper {
-  flex: 2; /* Вказує, що ця колонка займатиме дві частини ширини */
-  display: flex;
-  flex-direction: column;
-}
+
 
 .quote-author {
   font-size: 14px;
@@ -73,7 +79,6 @@
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  background-color: var(--primary-color);
 }
 
 .icon-barbell {
@@ -109,6 +114,10 @@
 }
 
 @media (min-width: 768px) {
+  .exercises-header {
+    font-size: 44px;
+    line-height: 48px;
+  }
   .quote-section-wrapper {
     display: flex;
     flex-direction: row;
@@ -172,6 +181,9 @@
 }
 
 @media (min-width: 1280px) {
+  .exercises-header {
+    margin: 0 auto 0 0;
+  }
   .quote-section-wrapper {
     flex-direction: column;
     justify-content: flex-start;
@@ -202,14 +214,40 @@
   }
 }
 
+.exercises-container {
+  padding-bottom: 80px;
+}
+
+.exercises-wrapper {
+  margin-bottom: 80px;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
 @media screen and (min-width: 768px) {
   .exercises-container {
     max-width: 769px;
+    padding-bottom: 100px;
+  }
+  .exercises-wrapper {
+    margin-bottom: 64px;
   }
 }
 
 @media screen and (min-width: 1440px) {
   .exercises-container {
     max-width: 1440px;
+    padding-bottom: 132px;
+  }
+  .content-wrapper {
+    flex-direction: row;
+    gap: 32px;
+  }
+  .exercises-wrapper {
+    margin-bottom: 0;
   }
 }
+

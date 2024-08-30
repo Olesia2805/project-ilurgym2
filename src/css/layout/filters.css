@@ -1,41 +1,75 @@
 /* Панель фільтрів */
 .filter-panel {
-    display: flex;
-    gap: 20px; /* Відстань між фільтрами */
-  }
-  
+  display: flex;
+  gap: 20px; /* Відстань між фільтрами */
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.filter-btn {
+  background: transparent;
+  border: none;
+  color: #666;
+  font-size: 16px;
+  cursor: pointer;
+  padding-bottom: 5px;
+  transition: color 0.3s;
+}
+
+.filter-btn.active {
+  color: #333;
+  font-weight: bold;
+  position: relative;
+}
+
+.filter-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #333;
+  border-radius: 50px;
+}
+
+.filter-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.filters-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 768px) {
   .filters {
-    display: flex;
-    gap: 10px;
+    margin-top: 32px;
   }
-  
+  .filters-wrapper {
+    margin-bottom: 32px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .filters-wrapper {
+    flex-direction: row;
+    align-items: center;
+  }
+  .filters {
+    margin-top: 0;
+    margin-left: 30px;
+  }
   .filter-btn {
-    background: none;
-    border: none;
-    color: #666;
-    font-size: 16px;
-    cursor: pointer;
-    padding-bottom: 5px;
-    transition: color 0.3s;
+    line-height: 24px;
   }
-  
-  .filter-btn.active {
-    color: #333;
-    font-weight: bold;
-    position: relative;
-  }
-  
   .filter-btn.active::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background-color: #333;
-    border-radius: 1px;
+    height: 4px;
+    top: 100%;
   }
-  
-  .filter-btn:hover {
-    background-color: #f0f0f0;
-  }
+}

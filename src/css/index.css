@@ -16,9 +16,6 @@
 @import url(layout/filters.css);
 @import url(layout/search.css);
 @import url(layout/categories.css);
-/* @import url(layout/quotes.css); */
-@import url(layout/quotes_my.css);
-
-@import url(components/category-card.css);
-
+@import url(layout/quotes.css);
 @import url(layout/mobile-menu.css);
+@import url(components/category-card.css);
