@@ -3,7 +3,6 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-bottom: 20px;
 }
 .quote-dynamic-block {
   display: flex;
@@ -29,7 +28,7 @@
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  background-color: rgba(86, 85, 85, 0.8);
+  background-color: var(--block-bg-color);
 }
 
 .icon-run {
@@ -120,7 +119,7 @@
 .daily-norm-subtitle {
   font-size: 14px;
   line-height: 129%;
-  color: var(--button-disabled-color);
+  color: var(--text-tertiary-color);
   margin-bottom: 16px;
 }
 
