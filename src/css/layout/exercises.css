@@ -227,3 +227,16 @@
     -webkit-box-orient: unset;
   }
 }
+
+
+@media screen and (min-width: 768px) {
+  .exercises-container {
+    max-width: 769px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .exercises-container {
+    max-width: 1440px;
+  }
+}

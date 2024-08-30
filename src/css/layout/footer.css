@@ -190,3 +190,32 @@
 }
 
 /* # end Copyright */
+
+.button-white {
+  animation: glow 1500ms infinite ease-in-out;
+}
+
+.button-white:hover {
+  outline: 0;
+  animation: none;
+  transition: var(--tran-duration);
+}
+
+.button-white:focus {
+  outline: 0;
+}
+
+@keyframes glow {
+  0% {
+    background: var(--copy-right-color);
+    box-shadow: 0px 0px 1px var(--copy-right-color);
+  }
+  50% {
+    background: var(--white-color);
+    box-shadow: 0px 0px 15px var(--white-color);
+  }
+  100% {
+    background: var(--copy-right-color);
+    box-shadow: 0px 0px 1px var(--copy-right-color);
+  }
+}
