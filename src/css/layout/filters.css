@@ -1,20 +1,41 @@
+/* Панель фільтрів */
 .filter-panel {
-    margin-bottom: 20px;
-}
-
-.filters {
+    display: flex;
+    gap: 20px; /* Відстань між фільтрами */
+  }
+  
+  .filters {
     display: flex;
     gap: 10px;
-}
-
-.filter-btn {
-    padding: 10px 15px;
-    border: 1px solid #ccc;
-    background-color: #f8f8f8;
+  }
+  
+  .filter-btn {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 16px;
     cursor: pointer;
-}
-
-.filter-btn.active {
+    padding-bottom: 5px;
+    transition: color 0.3s;
+  }
+  
+  .filter-btn.active {
+    color: #333;
+    font-weight: bold;
+    position: relative;
+  }
+  
+  .filter-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
     background-color: #333;
-    color: white;
-}
+    border-radius: 1px;
+  }
+  
+  .filter-btn:hover {
+    background-color: #f0f0f0;
+  }

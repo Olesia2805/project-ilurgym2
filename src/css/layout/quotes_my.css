@@ -1,0 +1,240 @@
+/* Ліва колонка з цитатами */
+.quote-section-wrapper {
+  flex: 1; /* Вказує, що ця колонка займатиме одну частину ширини */
+  margin-right: 20px; /* Відступ справа для розділення колонок */
+}
+
+.quote-section-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 20px;
+}
+.quote-dynamic-block {
+  display: flex;
+  background-color: var(--primary-color);
+  padding: 20px;
+  gap: 18px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  max-width: 335px;
+}
+
+.icon-run-wrapper {
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  background-color: rgba(86, 85, 85, 0.8);
+}
+
+.icon-run {
+  color: var(--white-bg-color);
+  width: 18px;
+  height: 20px;
+}
+
+.quote-title-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.icon-quote {
+  width: 20px;
+  height: 20px;
+}
+
+.quote-title {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 100%;
+  color: var(--white-color);
+}
+
+.quote {
+  font-size: 14px;
+  line-height: 129%;
+  color: var(--text-secondary-color);
+  margin-bottom: 16px;
+}
+
+.quote-author {
+  font-size: 14px;
+  line-height: 129%;
+  color: var(--white-color);
+}
+
+.quote-img {
+  display: block;
+  object-fit: cover;
+  width: 335px;
+  height: 242px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.daily-norm-block {
+  display: flex;
+  padding: 20px;
+  gap: 16px;
+  border-radius: 20px;
+  max-width: 335px;
+  background-color: var(--white-bg-color);
+  height: 201px;
+  overflow: hidden;
+}
+
+.icon-barbell-wrapper {
+  width: 34px;
+  height: 32px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  background-color: var(--primary-color);
+}
+
+.icon-barbell {
+  color: var(--white-bg-color);
+  width: 20px;
+  height: 20px;
+}
+
+.daily-norm-title {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 100%;
+  color: var(--primary-color);
+  margin-bottom: 2px;
+}
+
+.daily-norm-subtitle {
+  font-size: 14px;
+  line-height: 129%;
+  color: var(--button-disabled-color);
+  margin-bottom: 16px;
+}
+
+.daily-norm-text {
+  font-size: 14px;
+  line-height: 129%;
+  color: var(--primary-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+@media (min-width: 768px) {
+  .quote-section-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .quote-dynamic-block,
+  .daily-norm-block {
+    max-width: 400px;
+    gap: 16px;
+    height: 249px;
+    flex-shrink: 0;
+    margin-bottom: 0px;
+    padding: 40px;
+  }
+
+  .quote-img {
+    object-fit: cover;
+    height: 249px;
+    margin-bottom: 0px;
+    max-width: 288px;
+  }
+  .icon-run-wrapper {
+    width: 34px;
+  }
+
+  .quote-title-wrapper {
+    margin-bottom: 6px;
+  }
+
+  .icon-quote {
+    width: 24px;
+    height: 24px;
+  }
+
+  .quote-title {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 133%;
+  }
+
+  .quote {
+    margin-bottom: 18px;
+  }
+
+  .quote-author {
+    font-size: 16px;
+    line-height: 150%;
+    color: var(--white-color);
+  }
+
+  .daily-norm-title {
+    font-size: 24px;
+    line-height: 133%;
+  }
+
+  .daily-norm-subtitle {
+    margin-bottom: 20px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .quote-section-wrapper {
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 32px;
+  }
+  .quote-dynamic-block,
+  .daily-norm-block {
+    max-width: 444px;
+    height: auto;
+  }
+
+  .quote-img {
+    height: 242px;
+    min-width: 444px;
+  }
+
+  .quote {
+    margin-bottom: 8px;
+  }
+
+  .daily-norm-text {
+    overflow: visible;
+    text-overflow: unset;
+    display: block;
+    -webkit-line-clamp: unset;
+    -webkit-box-orient: unset;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .exercises-container {
+    max-width: 769px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .exercises-container {
+    max-width: 1440px;
+  }
+}

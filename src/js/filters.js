@@ -1,9 +1,56 @@
+// document.addEventListener('DOMContentLoaded', function () {
+//     const filterButtons = document.querySelectorAll('.filter-btn');
+//     // Установлюємо активний клас на першій кнопці, якщо жодна не активна
+//     if (!document.querySelector('.filter-btn.active') && filterButtons.length > 0) {
+//         filterButtons[0].classList.add('active');
+//     }
+//     const searchForm = document.getElementById('search-form');
+//     const searchInput = document.getElementById('search-input');
+
+//     // Ініціалізація першого завантаження категорій
+//     fetchCategories('Muscles');
+
+//     // Обробка кліків на кнопки фільтрів
+//     filterButtons.forEach(button => {
+//         button.addEventListener('click', () => {
+//             // Знімаємо активний клас з усіх кнопок
+//             filterButtons.forEach(btn => btn.classList.remove('active'));
+
+//             // Додаємо активний клас на клікнуту кнопку
+//             button.classList.add('active');
+
+//             // Отримуємо вибраний фільтр
+//             const selectedFilter = button.getAttribute('data-filter');
+
+//             // Завантажуємо категорії на основі вибраного фільтра
+//             fetchCategories(selectedFilter);
+//         });
+//     });
+
+//     // Обробка пошуку по ключовому слову
+//     searchForm.addEventListener('submit', function (event) {
+//         event.preventDefault();
+//         const keyword = searchInput.value.trim();
+//         const activeFilterButton = document.querySelector('.filter-btn.active');
+
+//         if (!activeFilterButton) {
+//             console.error('No active filter button found.');
+//             return;
+//         }
+
+//         const selectedFilter = activeFilterButton.getAttribute('data-filter');
+
+//         // Викликаємо функцію для завантаження вправ за ключовим словом
+//         fetchExercisesByKeyword(selectedFilter, keyword);
+//     });
+    
+// });
+
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
     const filterButtons = document.querySelectorAll('.filter-btn');
-    // Установлюємо активний клас на першій кнопці, якщо жодна не активна
-    if (!document.querySelector('.filter-btn.active') && filterButtons.length > 0) {
-        filterButtons[0].classList.add('active');
-    }
     const searchForm = document.getElementById('search-form');
     const searchInput = document.getElementById('search-input');
 
@@ -21,6 +68,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Отримуємо вибраний фільтр
             const selectedFilter = button.getAttribute('data-filter');
+
+            // Перевірка, чи потрібно показувати поле для пошуку
+            if (selectedFilter === 'Body parts' || selectedFilter === 'Equipment') {
+                searchForm.style.display = 'flex'; // Показуємо поле для пошуку
+            } else {
+                searchForm.style.display = 'none'; // Приховуємо поле для пошуку
+            }
 
             // Завантажуємо категорії на основі вибраного фільтра
             fetchCategories(selectedFilter);
@@ -43,7 +97,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Викликаємо функцію для завантаження вправ за ключовим словом
         fetchExercisesByKeyword(selectedFilter, keyword);
     });
-    
 });
 
 function fetchCategories(filter) {
@@ -145,3 +198,7 @@ function displayExercises(exercises) {
         exerciseContainer.appendChild(exerciseCard);
     });
 }
+
+
+
+
