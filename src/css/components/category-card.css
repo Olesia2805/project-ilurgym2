@@ -1,74 +1,74 @@
 .exercises-grid {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .exercises-grid {
+    gap: 32px 15px;
   }
-  
-  @media screen and (min-width: 768px) {
-    .exercises-grid {
-      gap: 32px 15px;
-    }
-  }
-  
+}
+
+.category-card {
+  border-radius: 12px;
+  width: 100%;
+  height: 225px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-family: var(--primary-font-family);
+  text-align: center;
+  overflow: hidden;
+  background-color: var(--image-backgrop);
+}
+
+@media screen and (min-width: 768px) {
   .category-card {
-    border-radius: 12px;
-    width: 100%;
+    max-width: 225px;
     height: 225px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    font-family: var(--primary-font-family);
-    text-align: center;
-    overflow: hidden;
-    background-color: var(--image-backgrop);
   }
-  
-  @media screen and (min-width: 768px) {
-    .category-card {
-      max-width: 225px;
-      height: 225px;
-    }
+}
+
+@media screen and (min-width: 1440px) {
+  .category-card {
+    max-width: 290px;
+    height: 242px;
   }
-  
-  @media screen and (min-width: 1440px) {
-    .category-card {
-      max-width: 290px;
-      height: 242px;
-    }
-  }
-  
-  .category-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-  }
-  
+}
+
+.category-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.category-card h3 {
+  font-size: 20px;
+  line-height: 1em;
+  color: var(--white-color);
+  font-weight: 400;
+  margin-bottom: 2px;
+}
+
+@media screen and (min-width: 1440px) {
   .category-card h3 {
-    font-size: 20px;
-    line-height: 1em;
-    color: var(--white-color);
-    font-weight: 400;
-    margin-bottom: 2px;
+    font-size: 24px;
   }
-  
-  @media screen and (min-width: 1440px) {
-    .category-card h3 {
-      font-size: 24px;
-    }
-  }
-  
-  .category-card p {
-    font-size: 12px;
-    line-height: 1.5em;
-    color: var(--text-secondary-lighter-color);
-  }
+}
+
+.category-card p {
+  font-size: 12px;
+  line-height: 1.5em;
+  color: var(--text-secondary-lighter-color);
+}

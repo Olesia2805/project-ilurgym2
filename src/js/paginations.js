@@ -21,7 +21,7 @@ const fetchData = async (category, page) => {
   }
 };
 
-const fetchExercises = async (page) => {
+const fetchExercises = async page => {
   const screenWidth = window.innerWidth;
   const limit = screenWidth < 768 ? 8 : 10;
 
@@ -30,8 +30,8 @@ const fetchExercises = async (page) => {
       'https://your-energy.b.goit.study/api/exercises',
       {
         params: {
-        page: page,
-        limit: limit,
+          page: page,
+          limit: limit,
         },
       }
     );
@@ -44,7 +44,7 @@ const fetchExercises = async (page) => {
 };
 
 // Функція для рендеру отриманих елементів
-const renderItems = (items) => {
+const renderItems = items => {
   const contentDiv = document.getElementById('content');
   contentDiv.innerHTML = ''; // Очищуємо попередній контент
 
@@ -89,11 +89,15 @@ const renderPagination = (currentPage, totalPages, onPageChange) => {
 
 // Функція для обробки зміни сторінки
 const onPageChange = async (category, page, isExercises) => {
-  const data = isExercises ? await fetchExercises(page) : await fetchData(category, page);
+  const data = isExercises
+    ? await fetchExercises(page)
+    : await fetchData(category, page);
 
   if (data && data.results) {
     renderItems(data.results); // Використовуємо 'results' для рендерингу елементів
-    renderPagination(page, data.totalPages || 1, (newPage) => onPageChange(category, newPage, isExercises));
+    renderPagination(page, data.totalPages || 1, newPage =>
+      onPageChange(category, newPage, isExercises)
+    );
   } else {
     renderItems([]); // Якщо немає даних, відображаємо повідомлення
   }

@@ -8,6 +8,7 @@
 @import url(layout/header.css);
 @import url(layout/modal.css);
 @import url(layout/hero.css);
+@import url(layout/exercises-home.css);
 @import url(layout/exercises.css);
 @import url(layout/footer.css);
 @import url(layout/socials.css);
@@ -19,3 +20,5 @@
 @import url(layout/quotes_my.css);
 
 @import url(components/category-card.css);
+
+@import url(layout/mobile-menu.css);
