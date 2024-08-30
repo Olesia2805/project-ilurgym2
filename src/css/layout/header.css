@@ -5,6 +5,7 @@
   background-color: var(--white-color);
   padding-top: 20px;
   padding-bottom: 20px;
+  transition: all .5s ease;
 }
 
 .is-scrolling {

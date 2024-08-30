@@ -27,13 +27,13 @@
 } */
 
 /* Картки категорій та вправ */
-.category-card, .exercise-card {
-    flex: 1 1 calc(33.333% - 20px); /* Кожна картка займатиме третину ширини контейнера з урахуванням відступів */
-    background-color: #f8f8f8;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    text-align: center;
-    cursor: pointer;
-  }
-  
+/*.category-card, .exercise-card {*/
+/*  flex: 1 1 calc(33.333% - 20px); !* Кожна картка займатиме третину ширини контейнера з урахуванням відступів *!*/
+/*  background-color: #f8f8f8;*/
+/*  padding: 10px;*/
+/*  border: 1px solid #ddd;*/
+/*  border-radius: 8px;*/
+/*  text-align: center;*/
+/*  cursor: pointer;*/
+/*}*/
+/**/
