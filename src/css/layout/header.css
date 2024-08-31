@@ -70,11 +70,11 @@
     padding: 6px 12px;
     display: block;
     border: 1px solid var(--primary-color);
+    border-radius: 30px;
   }
 
   .nav-link.active {
     color: var(--primary-color);
-    border-radius: 30px;
     background-color: var(--white-color);
   }
 

@@ -2,9 +2,11 @@
 let mybutton = document.getElementById('myBtn');
 let isfooter = document.getElementsByClassName('.footer');
 
-mybutton.onclick = function () {
-  topFunction();
-};
+if (mybutton) {
+  mybutton.onclick = function () {
+    topFunction();
+  };
+}
 
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function () {

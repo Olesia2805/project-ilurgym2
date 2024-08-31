@@ -1,3 +1,5 @@
+import { getFavorites, removeFromFavorites } from './favorites.js';
+import { openExerciseModal } from './modal.js';
 import { axiosInstance } from './services/api-service.js';
 
 const FILTER = {
@@ -17,12 +19,16 @@ let currentFilter = FILTER.MUSCLES;
 let currentCategory = null;
 
 document.addEventListener('DOMContentLoaded',  async () => {
-  // Ініціалізація першого завантаження категорій
-  const { categories, page, totalPages } = await fetchCategories(FILTER.MUSCLES);
-  renderCategories(categories);
-  renderPagination(TYPE.CATEGORY, page, totalPages, FILTER.MUSCLES);
+  const favoritesContainer = document.getElementById('favorites');
+  if (favoritesContainer) {
+    renderFavorites();
+  } else {
+    const { categories, page, totalPages } = await fetchCategories(FILTER.MUSCLES);
+    renderCategories(categories);
+    renderPagination(TYPE.CATEGORY, page, totalPages, FILTER.MUSCLES);
 
-  initFilterButtons();
+    initFilterButtons();
+  }
 });
 
 const initFilterButtons = () => {
@@ -116,6 +122,7 @@ const fetchExercises = async (filter, category, page = 1, keyword = null) => {
 
 const renderCategories = (categories) => {
   const exerciseContainer = document.querySelector('.exercises-grid');
+  if (!exerciseContainer) return;
   exerciseContainer.innerHTML = '';
   changeSearchFormVisibility(false);
   updateFilterSectionHeader(false);
@@ -149,8 +156,28 @@ const renderCategories = (categories) => {
   exerciseContainer.appendChild(fragment);
 };
 
-const renderExercises = (exercises) => {
+const getRatingMarkup = (rating) => `
+  <div class="rating">
+    <span>
+      ${rating}
+    </span>
+    <svg class="icon-star">
+      <use href="./img/icons/icons.svg#icon-star"></use>
+    </svg>
+  </div>
+`;
+
+const getTrashButtonMarkup = (id) => `
+  <button class="trash-btn" data-id="${id}">
+    <svg width="16px" height="16px">
+      <use href="./img/icons/icons.svg#icon-trash"></use>
+    </svg>
+  </button>
+`;
+
+const renderExercises = (exercises, isFavorites = false) => {
   const exerciseContainer = document.querySelector('.exercises-grid');
+  if (!exerciseContainer) return;
   exerciseContainer.innerHTML = '';
   changeSearchFormVisibility(true);
   updateFilterSectionHeader(true, currentCategory);
@@ -161,19 +188,12 @@ const renderExercises = (exercises) => {
     return;
   }
 
-  const cards = exercises.map(({ bodyPart, burnedCalories, target, name, rating }) => `
+  const cards = exercises.map(({ bodyPart, burnedCalories, target, name, rating, _id }) => `
     <div class="exercise-card">
       <div class="exercise-card-header">
         <div class="label">WORKOUT</div>
-        <div class="rating">
-          <span>
-            ${rating}
-          </span>
-          <svg class="icon-star">
-            <use href="./img/icons/icons.svg#icon-star"></use>
-          </svg>
-        </div>
-        <button class="start-btn">
+        ${isFavorites ? getTrashButtonMarkup(_id) : getRatingMarkup(rating)}
+        <button class="start-btn" data-id="${_id}">
           Start
           <svg class="icon-arrow">
             <use href="./img/icons/icons.svg#icon-arrow-start"></use>
@@ -203,6 +223,32 @@ const renderExercises = (exercises) => {
   `).join(' ');
 
   exerciseContainer.insertAdjacentHTML('afterbegin', cards);
+
+  document.querySelectorAll('.exercise-card .start-btn').forEach((card) => {
+    const exerciseId = card.getAttribute('data-id');
+    console.log(`Exercise ID: ${exerciseId}`); // Лог ID вправи
+    if (exerciseId) {
+      card.addEventListener('click', () => {
+        openExerciseModal(exerciseId, false); // Передаємо параметр false для інших сторінок
+      });
+    } else {
+      console.error('Exercise ID is missing.');
+    }
+  });
+
+  document.querySelectorAll('.trash-btn').forEach((card) => {
+    const exerciseId = card.getAttribute('data-id');
+    console.log(`Exercise ID: ${exerciseId}`);
+    console.log('card', card);
+    console.log('exerciseId', exerciseId);
+    if (exerciseId) {
+      card.addEventListener('click', () => {
+        removeFromFavorites(exerciseId, renderFavorites);
+      });
+    } else {
+      console.error('Exercise ID is missing.');
+    }
+  });
 };
 
 const renderPagination = (
@@ -212,6 +258,7 @@ const renderPagination = (
   filter,
 ) => {
   const pagination = document.getElementById('pagination');
+  if (!pagination) return;
   pagination.innerHTML = '';
 
   if (totalPages <= 1) return; // Якщо тільки одна сторінка, не потрібно рендерити пагінацію
@@ -241,8 +288,19 @@ const renderPagination = (
   pagination.appendChild(fragment);
 };
 
+export const renderFavorites = () => {
+  const exerciseContainer = document.querySelector('.exercises-grid');
+  const exercises = getFavorites();
+  if (exercises.length > 0) {
+    renderExercises(exercises, true);
+  } else {
+    exerciseContainer.innerHTML = '<p class="empty-favorites">It appears that you haven\'t added any exercises to your favorites yet. To get started, you can add exercises that you like to your favorites for easier access in the future.</p>';
+  }
+};
+
 const changeSearchFormVisibility = (isVisible) => {
   const searchForm = document.getElementById('search-form');
+  if (!searchForm) return;
   searchForm.style.display = isVisible ? 'block' : 'none';
 
   if (isVisible) {
@@ -270,6 +328,7 @@ const searchFormSubmitHandler = async (event) => {
 const updateFilterSectionHeader = (isVisible, filter = '') => {
   const span = document.querySelector('.exercises-header-span');
   const header = document.querySelector('.exercises-subcategory');
+  if (!span || !header) return;
   span.style.display = isVisible ? 'flex' : 'none';
   header.textContent = filter;
 };

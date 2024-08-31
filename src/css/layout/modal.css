@@ -1,29 +1,38 @@
 .modal {
-  display: flex;
+  display: none; /* Початково приховано */
   justify-content: center;
   align-items: center;
 
   position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
   height: 100vh;
-
   background-color: rgba(0, 0, 0, 0.247);
   z-index: 10;
-
   color: #f4f4f4;
+}
+
+.modal.is-visible {
+  display: flex; /* Показуємо модальне вікно, коли додається клас is-visible */
 }
 
 .modal__block {
   background-color: #242424;
   width: 704px;
-  height: 486px;
+  height: auto;
   border-radius: 20px;
 
   display: flex;
   justify-content: space-between;
   padding: 32px;
 
-  position: relative;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .modal__img {
@@ -51,12 +60,27 @@
   margin-bottom: 10px;
 }
 
+.modal__content h2:first-letter {
+   text-transform: uppercase;
+}
+
 .modal__exit {
   position: absolute;
   top: 16px;
   right: 16px;
   font-size: 28px;
   cursor: pointer;
+  color: #f4f4f4;
+  z-index: 1000;
+  width: 28px;  /* Додаємо ширину */
+  height: 28px; /* Додаємо висоту */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal__exit:hover {
+  color: #eea10c;
 }
 
 .modal__rating {
@@ -71,16 +95,16 @@
 
 .modal__rating_yellow {
   color: #eea10c;
-  font-size: 18ox;
+  font-size: 18px;
 }
 
 .modal__rating_grey {
   color: #f4f4f433;
-  font-size: 18ox;
+  font-size: 18px;
 }
 
 .modal__info {
-  padding: 8px 0px;
+  padding: 8px 0;
   border-top: 1px solid #f4f4f433;
   border-bottom: 1px solid #f4f4f433;
 
@@ -88,6 +112,10 @@
   flex-wrap: wrap;
 
   margin-bottom: 16px;
+}
+
+.modal__info > div > div:nth-child(2):first-letter {
+  text-transform: capitalize;
 }
 
 .modal__info > div {
@@ -101,22 +129,22 @@
 .modal__info > div > div:nth-child(1) {
   color: #f4f4f466;
   font-size: 12px;
-  font-weight: 400px;
+  font-weight: 400;
   line-height: 18px;
   margin-bottom: 4px;
 }
 
 .modal__info > div > div:nth-child(2) {
   font-size: 14px;
-  font-family: 500;
   line-height: 18px;
 }
 
 .modal__description {
   color: #f4f4f499;
   font-size: 14px;
-  font-weight: 400px;
+  font-weight: 400;
   line-height: 18px;
+  margin-bottom: 40px;
 }
 
 .modal__btns {

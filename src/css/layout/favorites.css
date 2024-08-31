@@ -1,0 +1,22 @@
+.empty-favorites {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 318px;
+  min-height: 100px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 18px;
+  font-family: var(--primary-font-family);
+  color: var(--primary-color);
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 768px) {
+  .empty-favorites {
+    max-width: 554px;
+    min-height: 320px;
+    font-size: 18px;
+    line-height: 24px;
+  }
+}

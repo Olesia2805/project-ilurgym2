@@ -254,3 +254,12 @@
   }
 }
 
+.favorites-header {
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .exercises-header {
+    margin-bottom: 32px;
+  }
+}

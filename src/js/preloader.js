@@ -6,5 +6,5 @@ const hidePreloader = () => {
 document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     hidePreloader();
-  }, 1000);
+  }, 500);
 });
