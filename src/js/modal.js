@@ -19,6 +19,16 @@ export function openExerciseModal(exerciseId, isFavoritesPage) {
     });
 }
 
+const renderRating = (rating) => {
+  const fullStart = Math.round(rating);
+  const fullStarsMarkup = Array(fullStart).fill('<svg class="icon-star"><use href="./img/icons/icons.svg#icon-star"></use></svg>');
+  const emptyStarsMarkup = Array(5 - fullStart).fill('<svg class="icon-star"><use href="./img/icons/icons.svg#icon-star-empty"></use></svg>');
+  return `
+    ${fullStarsMarkup.join('')}
+    ${emptyStarsMarkup.join('')}
+  `
+};
+
 function fillExerciseModal(exercise) {
   const modalTitle = document.querySelector('.modal-title');
   const modalImage = document.querySelector('.modal-image');
@@ -28,6 +38,7 @@ function fillExerciseModal(exercise) {
   const modalCalories = document.querySelector('.modal-calories');
   const modalDescription = document.querySelector('.modal__description');
   const modalBlock = document.querySelector('.modal__block');
+  const ratingBlock = document.querySelector('.modal__rating');
 
   // Зберігаємо ID вправи в атрибуті data-id модального вікна
   modalBlock.setAttribute('data-id', exercise._id);
@@ -41,6 +52,10 @@ function fillExerciseModal(exercise) {
   modalEquipment.textContent = exercise.equipment || 'No equipment available';
   modalCalories.textContent = `${exercise.burnedCalories || 'N/A'}`;
   modalDescription.textContent = exercise.description || 'No description available';
+  ratingBlock.innerHTML = `
+    <span>${exercise.rating}</span>
+    <span>${renderRating(exercise.rating)}</span>
+  `;
 
   // Оновлюємо кнопки в модальному вікні
   const modalButtons = document.querySelector('.modal__btns');
