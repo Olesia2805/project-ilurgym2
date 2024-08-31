@@ -187,3 +187,138 @@
   background-color: #242424;
   color: #f4f4f4;
 }
+
+.rating-modal {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.247);
+  z-index: 10;
+  color: #f4f4f4;
+}
+
+.rating-modal.is-visible {
+  display: flex; /* Показуємо модальне вікно, коли додається клас is-visible */
+}
+
+.rating-modal__block {
+  background-color: #242424;
+  width: 704px;
+  height: auto;
+  border-radius: 20px;
+  padding: 32px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.rating-modal__exit {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #f4f4f4;
+  z-index: 1000;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rating-modal__exit:hover {
+  color: #eea10c;
+}
+
+.rating-modal__title {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  margin-bottom: 16px;
+}
+
+.rating-modal__stars {
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.rating-modal__stars span {
+  font-size: 24px;
+  cursor: pointer;
+  color: #eea10c;
+}
+
+.rating-modal__value {
+  font-size: 16px;
+  line-height: 18px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.rating-modal__input,
+.rating-modal__textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  background-color: #3b3b3b;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+.rating-modal__textarea {
+  resize: vertical;
+  height: 80px; /* Висота текстової області */
+}
+
+.rating-modal__btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.rating-modal__btn {
+  border-radius: 30px;
+  font-weight: 400;
+  padding: 12px 24px;
+  font-size: 15px;
+  line-height: 24px;
+  border: none;
+  cursor: pointer;
+}
+
+.rating-modal__cancel-btn {
+  background-color: #242424;
+  color: #f4f4f4;
+  border: 1px solid #f4f4f4;
+}
+
+.rating-modal__cancel-btn:hover {
+  background-color: #3b3b3b;
+}
+
+.rating-modal__submit-btn {
+  background-color: #f4f4f4;
+  color: #242424;
+}
+
+.rating-modal__submit-btn:hover {
+  background-color: #e6e6e6;
+}

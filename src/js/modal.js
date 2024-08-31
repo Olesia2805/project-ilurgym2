@@ -20,14 +20,240 @@ export function openExerciseModal(exerciseId, isFavoritesPage) {
     });
 }
 
+function openRatingModal() {
+  const exerciseId = document.querySelector('.modal__block').getAttribute('data-id');
+  if (exerciseId) {
+      closeModal(); // Закриваємо модальне вікно вправи перед відкриттям модального вікна рейтингу
+      const ratingModal = document.getElementById('ratingModal');
+      if (ratingModal) {
+          resetRatingForm(); // Очищаємо форму перед відкриттям модального вікна
+          ratingModal.setAttribute('data-exercise-id', exerciseId);
+          ratingModal.classList.add('is-visible');
+          console.log(`Rating modal opened for exercise ID: ${exerciseId}`);
+          setupStarRating(); // Ініціалізуємо зірочки при відкритті модального вікна рейтингу
+      } else {
+          console.error('Rating modal element not found.');
+      }
+  } else {
+      console.error('Exercise ID is missing when trying to open the rating modal.');
+  }
+}
+
+// Закриття модального вікна по хрестику
+document.addEventListener('click', function (event) {
+  if (event.target.closest('.rating-modal__exit')) {
+    closeRatingModal();
+  }
+});
+
+// Закриття модального вікна по кліку поза модальним вікном
+document.addEventListener('click', function (event) {
+  const ratingModal = document.getElementById('ratingModal');
+  const modalBlock = document.querySelector('.rating-modal__block');
+  const isVisible = ratingModal.classList.contains('is-visible');
+
+  // Якщо модальне вікно відкрите і клік поза межами блоку модального вікна, закриваємо його
+  if (isVisible && ratingModal && !modalBlock.contains(event.target)) {
+    closeRatingModal();
+  }
+});
+
+// Закриття модального вікна по натисканню на клавішу Esc
+document.addEventListener('keydown', function (event) {
+  if (event.key === 'Escape') {
+    closeRatingModal();
+  }
+});
+
+// Закриття модального вікна по кліку на кнопці Cancel
+document.addEventListener('click', function (event) {
+  if (event.target.matches('.rating-modal__cancel-btn')) {
+    closeRatingModal();
+  }
+});
+
+// Функція для закриття модального вікна
+function closeRatingModal() {
+  const ratingModal = document.getElementById('ratingModal');
+  if (ratingModal) {
+    ratingModal.classList.remove('is-visible');
+    console.log('Rating modal is now hidden.');
+    resetRatingForm(); // Скидаємо форму після закриття модального вікна
+  } else {
+    console.error('Rating modal element is missing.');
+  }
+}
+
+
+function validateEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(String(email).toLowerCase());
+}
+
+function setupStarRating() {
+  const starsContainer = document.querySelector('.rating-modal__stars');
+
+  if (!starsContainer) {
+      console.error('Rating stars container not found.');
+      return;
+  }
+
+  console.log('Rating stars HTML:', starsContainer.innerHTML);
+
+  const stars = starsContainer.querySelectorAll('span');
+
+  if (stars.length === 0) {
+      console.error('No star elements found for rating.');
+      return;
+  }
+
+  stars.forEach((star, index) => {
+      star.addEventListener('click', function () {
+          stars.forEach(s => s.classList.remove('selected'));
+
+          for (let i = 0; i <= index; i++) {
+              stars[i].classList.add('selected');
+          }
+
+          const ratingValue = index + 1;
+          const ratingValueElement = document.querySelector('.rating-modal__value');
+          if (ratingValueElement) {
+              ratingValueElement.textContent = ratingValue.toFixed(1);
+              ratingValueElement.setAttribute('data-selected-rating', ratingValue);
+              console.log(`Selected star rating: ${ratingValue}`);
+          } else {
+              console.error('.rating-modal__value element not found');
+          }
+      });
+  });
+}
+
+function resetRatingForm() {
+  const emailInput = document.querySelector('.rating-modal__email');
+  const commentInput = document.querySelector('.rating-modal__comment');
+  const stars = document.querySelectorAll('.rating-modal__stars span');
+  const ratingValue = document.querySelector('.rating-modal__value');
+
+  if (emailInput) {
+      emailInput.value = '';
+  } else {
+      console.error('.rating-modal__email element not found');
+  }
+
+  if (commentInput) {
+      commentInput.value = '';
+  } else {
+      console.error('.rating-modal__comment element not found');
+  }
+
+  if (stars.length > 0) {
+      stars.forEach(s => s.classList.remove('selected'));
+  } else {
+      console.error('No star elements found for rating');
+  }
+
+  if (ratingValue) {
+      ratingValue.textContent = '0.0';
+      ratingValue.removeAttribute('data-selected-rating');
+  } else {
+      console.error('.rating-modal__value element not found');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('click', function (event) {
+    if (event.target.matches('.rating-btn')) {
+      console.log('Rating button clicked');
+      openRatingModal();
+    }
+    if (event.target.matches('.rating-modal__submit-btn')) {
+      console.log('Submit Rating button clicked');
+      
+      const ratingModal = document.getElementById('ratingModal');
+      const exerciseId = ratingModal?.getAttribute('data-exercise-id');
+      console.log(`Submitting rating for exercise ID: ${exerciseId}`);
+
+      if (!exerciseId) {
+        alert('Exercise ID is missing.');
+        return;
+      }
+
+      const selectedRating = document.querySelector('.rating-modal__value')?.getAttribute('data-selected-rating');
+      if (!selectedRating) {
+        alert('Please select a rating.');
+        return;
+      }
+
+      const email = document.querySelector('.rating-modal__email')?.value.trim();
+      const comment = document.querySelector('.rating-modal__comment')?.value.trim();
+
+      if (!selectedRating || !email || !comment) {
+        alert('Please fill out all fields.');
+        return;
+      }
+
+      if (!validateEmail(email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
+      const requestData = {
+        rate: Number(selectedRating),
+        email: email,
+        review: comment
+      };
+
+      console.log('Request data:', requestData);
+
+      fetch(`https://your-energy.b.goit.study/api/exercises/${exerciseId}/rating`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestData)
+      })
+      .then(response => {
+        console.log('Response status:', response.status);
+        if (response.status === 409) {
+          return response.json().then(err => {
+            throw new Error(`Rating already submitted with this email: ${err.message}`);
+          });
+        }
+        if (!response.ok) {
+          return response.json().then(err => {
+            throw new Error(`Failed to submit rating: ${err.message}`);
+          });
+        }
+        return response.json();
+      })
+      .then(data => {
+        alert('Rating submitted successfully!');
+        closeRatingModal(); 
+      })
+      .catch(error => {
+        if (error.message.includes('Rating already submitted with this email')) {
+          alert('You have already submitted a rating using this email address.');
+        } else {
+          console.error('Error submitting rating:', error);
+          alert('Error submitting rating. Please try again later.');
+        }
+      });
+    }
+  });
+});
+
 const renderRating = (rating) => {
-  const fullStart = Math.round(rating);
-  const fullStarsMarkup = Array(fullStart).fill(`<svg class="icon-star"><use href="${icons}#icon-star"></use></svg>`);
-  const emptyStarsMarkup = Array(5 - fullStart).fill(`<svg class="icon-star"><use href="${icons}#icon-star-empty"></use></svg>`);
+  const fullStars = Math.floor(rating);
+  const halfStar = rating % 1 >= 0.5;
+  const fullStarsMarkup = Array(fullStars).fill(`<svg class="icon-star"><use href="${icons}#icon-star"></use></svg>`);
+  const emptyStarsMarkup = Array(5 - fullStars - (halfStar ? 1 : 0)).fill(`<svg class="icon-star"><use href="${icons}#icon-star-empty"></use></svg>`);
+  const halfStarMarkup = halfStar ? `<svg class="icon-star-half"><use href="${icons}#icon-star-half"></use></svg>` : '';
+
   return `
     ${fullStarsMarkup.join('')}
+    ${halfStarMarkup}
     ${emptyStarsMarkup.join('')}
-  `
+  `;
 };
 
 function fillExerciseModal(exercise) {
@@ -54,7 +280,7 @@ function fillExerciseModal(exercise) {
   modalCalories.textContent = `${exercise.burnedCalories || 'N/A'}`;
   modalDescription.textContent = exercise.description || 'No description available';
   ratingBlock.innerHTML = `
-    <span>${exercise.rating}</span>
+    <span>${exercise.rating.toFixed(1)}</span>
     <span>${renderRating(exercise.rating)}</span>
   `;
 
@@ -65,37 +291,37 @@ function fillExerciseModal(exercise) {
 
   modalButtons.innerHTML = `
     <button class="favorites-btn">${isFavorite ? 'Remove' : 'Add to favorites'}</button>
-<!--    <button class="rating-btn">Give a rating</button>-->
+    <button class="rating-btn">Give a rating</button>
   `;
 
   const favoritesButton = document.querySelector('.favorites-btn');
   const favoritesContainer = document.getElementById('favorites');
   favoritesButton.addEventListener('click', function () {
-    if (isFavorite) {
-      const removeFavoriteCallback = favoritesContainer ? renderFavorites : undefined;
-      removeFromFavorites(exercise._id, removeFavoriteCallback);
-    } else {
-      addToFavorites(exercise);
-    }
-    closeModal(); // Закриваємо модальне вікно після додавання/видалення
+      if (isFavorite) {
+          const removeFavoriteCallback = favoritesContainer ? renderFavorites : undefined;
+          removeFromFavorites(exercise._id, removeFavoriteCallback);
+      } else {
+          addToFavorites(exercise);
+      }
+      closeModal(); // Закриваємо модальне вікно після додавання/видалення
   });
 }
 
 function showModal() {
   const modal = document.querySelector('.modal');
   if (modal) {
-    modal.classList.add('is-visible');
+      modal.classList.add('is-visible');
   } else {
-    showIziToast('Modal element is missing.', 'Error ❌');
+      showIziToast('Modal element is missing.', 'Error ❌');
   }
 }
 
 function closeModal() {
   const modal = document.querySelector('.modal');
   if (modal) {
-    modal.classList.remove('is-visible');
+      modal.classList.remove('is-visible');
   } else {
-    showIziToast('Modal element is missing.', 'Error ❌');
+      showIziToast('Modal element is missing.', 'Error ❌');
   }
 }
 
