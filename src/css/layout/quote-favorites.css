@@ -129,7 +129,6 @@
     justify-content: flex-start;
     flex-wrap: wrap;
     gap: 16px;
-    max-width: 494px;
   }
   .quote-dynamic-block {
     min-width: 704px;
@@ -191,9 +190,13 @@
   }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1440px) {
   .quote-dynamic-block {
     min-width: 494px;
+  }
+
+  .quote-section-wrapper {
+    max-width: 494px;
   }
 
   .daily-norm-block {
