@@ -6,4 +6,5 @@ import './js/paginations.js';
 import './js/services/subscribe.js';
 import './js/mobile-menu.js';
 import './js/filters.js';
+import './js/preloader.js';
 import './js/scroll-to-top.js';

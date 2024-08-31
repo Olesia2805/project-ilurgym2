@@ -1,13 +1,30 @@
-h1.loader {
+.preloader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.preloader--hidden {
+  display: none;
+}
+
+.loader {
   text-align: center;
   text-transform: uppercase;
-  font-size: 3em;
+  font-size: 2em;
   color: transparent;
   letter-spacing: 0.1em;
 }
 @media screen and (min-width: 768px) {
-  h1.loader {
-    font-size: 7em;
+  .loader {
+    font-size: 6em;
   }
 }
 
@@ -30,20 +47,32 @@ h1.loader {
 }
 
 .loader span:nth-child(2) {
-  animation-delay: 0.15s;
+  animation-delay: .1s;
 }
 .loader span:nth-child(3) {
-  animation-delay: 0.3s;
+  animation-delay: .2s;
 }
 .loader span:nth-child(4) {
-  animation-delay: 0.45s;
-}
-.loader span:nth-child(5) {
-  animation-delay: 0.6s;
+  animation-delay: .3s;
 }
 .loader span:nth-child(6) {
-  animation-delay: 0.75s;
+  animation-delay: .4s;
 }
 .loader span:nth-child(7) {
-  animation-delay: 0.9s;
+  animation-delay: .5s;
+}
+.loader span:nth-child(8) {
+  animation-delay: .6s;
+}
+.loader span:nth-child(9) {
+  animation-delay: .7s;
+}
+.loader span:nth-child(10) {
+  animation-delay: .8s;
+}
+.loader span:nth-child(11) {
+  animation-delay: .9s;
+}
+.loader span:nth-child(12) {
+  animation-delay: 1s;
 }
