@@ -1,62 +1,23 @@
-// document.addEventListener('DOMContentLoaded', function () {
-//     const filterButtons = document.querySelectorAll('.filter-btn');
-//     // Установлюємо активний клас на першій кнопці, якщо жодна не активна
-//     if (!document.querySelector('.filter-btn.active') && filterButtons.length > 0) {
-//         filterButtons[0].classList.add('active');
-//     }
-//     const searchForm = document.getElementById('search-form');
-//     const searchInput = document.getElementById('search-input');
+import { axiosInstance } from './services/api-service.js';
 
-//     // Ініціалізація першого завантаження категорій
-//     fetchCategories('Muscles');
+const FILTER = {
+  MUSCLES: 'Muscles',
+  BODY_PARTS: 'Body parts',
+  EQUIPMENT: 'Equipment',
+};
 
-//     // Обробка кліків на кнопки фільтрів
-//     filterButtons.forEach(button => {
-//         button.addEventListener('click', () => {
-//             // Знімаємо активний клас з усіх кнопок
-//             filterButtons.forEach(btn => btn.classList.remove('active'));
-
-//             // Додаємо активний клас на клікнуту кнопку
-//             button.classList.add('active');
-
-//             // Отримуємо вибраний фільтр
-//             const selectedFilter = button.getAttribute('data-filter');
-
-//             // Завантажуємо категорії на основі вибраного фільтра
-//             fetchCategories(selectedFilter);
-//         });
-//     });
-
-//     // Обробка пошуку по ключовому слову
-//     searchForm.addEventListener('submit', function (event) {
-//         event.preventDefault();
-//         const keyword = searchInput.value.trim();
-//         const activeFilterButton = document.querySelector('.filter-btn.active');
-
-//         if (!activeFilterButton) {
-//             console.error('No active filter button found.');
-//             return;
-//         }
-
-//         const selectedFilter = activeFilterButton.getAttribute('data-filter');
-
-//         // Викликаємо функцію для завантаження вправ за ключовим словом
-//         fetchExercisesByKeyword(selectedFilter, keyword);
-//     });
-
-// });
-
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded',  async () => {
   const filterButtons = document.querySelectorAll('.filter-btn');
   const searchForm = document.getElementById('search-form');
   const searchInput = document.getElementById('search-input');
 
   // Ініціалізація першого завантаження категорій
-  fetchCategories('Muscles');
+  const categories = await fetchCategories(FILTER.MUSCLES);
+  renderCategories(categories);
 
   // Обробка кліків на кнопки фільтрів
-  filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', async () => {
       // Знімаємо активний клас з усіх кнопок
       filterButtons.forEach(btn => btn.classList.remove('active'));
 
@@ -74,7 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       // Завантажуємо категорії на основі вибраного фільтра
-      fetchCategories(selectedFilter);
+      const categories = await fetchCategories(selectedFilter);
+      renderCategories(categories);
     });
   });
 
@@ -96,66 +58,72 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-function fetchCategories(filter) {
-  fetch(`https://your-energy.b.goit.study/api/filters?filter=${filter}&page=1&limit=12`)
-    .then(response => response.json())
-    .then(data => {
-      console.log('Received data:', data);  // Перевірка відповіді від API
-      if (data.results && Array.isArray(data.results)) {
-          displayCategories(data.results);
-      } else {
-          displayCategories([]);
+const fetchCategories = async (filter, page = 1, limit = 12) => {
+  try {
+    const response = await axiosInstance.get(`/filters`, {
+      params: {
+        filter,
+        page,
+        limit,
       }
-    })
-    .catch(error => {
-      console.error('Error fetching categories:', error);
-      displayCategories([]);
     });
-}
-
-function displayCategories(categories) {
-    const categoryContainer = document.querySelector('.category-container');
-    categoryContainer.innerHTML = '';
-
-    if (categories.length === 0) {
-        categoryContainer.innerHTML = '<p>No categories found.</p>';
-        return;
+    const data = response.data;
+    if (data.results) {
+      return data.results;
     }
+    return [];
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    return [];
+  }
+};
 
-    categories.forEach(category => {
-        const categoryCard = document.createElement('div');
-        categoryCard.classList.add('category-card');
-        categoryCard.innerHTML = `
-            <img src="${category.imgURL}" alt="${category.name}" />
-            <h3>${category.name}</h3>
-            <p>${category.filter}</p>
-        `;
-
-        categoryCard.addEventListener('click', () => {
-            // Приховуємо категорії та завантажуємо вправи
-            categoryContainer.style.display = 'none';
-            fetchExercisesByCategory(category.name);
-        });
-
-        categoryContainer.appendChild(categoryCard);
+const fetchExercises = async (filter, category) => {
+  try {
+    const response = await axiosInstance.get(`/exercises`, {
+      params: {
+        ...(filter === FILTER.MUSCLES && { muscles: category }),
+        ...(filter === FILTER.BODY_PARTS && { bodypart: category }),
+        ...(filter === FILTER.EQUIPMENT && { equipment: category }),
+      }
     });
+    const data = response.data;
+    if (data.results) {
+      return data.results;
+    }
+    return [];
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    return [];
+  }
 }
 
-function fetchExercisesByCategory(category) {
-    fetch(`https://your-energy.b.goit.study/api/exercises?muscles=${category}`)
-        .then(response => response.json())
-        .then(data => {
-            console.log('data.exercises', data)
-            if (data.results && Array.isArray(data.results)) {
-                displayExercises(data.results);
-            } else {
-                displayExercises([]);
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching exercises:', error);
-            displayExercises([]);
-        });
+const renderCategories = (categories) => {
+  const exerciseContainer = document.querySelector('.exercises-grid');
+  exerciseContainer.innerHTML = '';
+
+  if (categories.length === 0) {
+    exerciseContainer.innerHTML = '<p>No categories found.</p>';
+    return;
+  }
+
+  categories.forEach((category) => {
+    const categoryCard = document.createElement('div');
+    categoryCard.classList.add('category-card');
+    categoryCard.innerHTML = `
+          <img src="${category.imgURL}" alt="${category.name}" />
+          <h3>${category.name}</h3>
+          <p>${category.filter}</p>
+      `;
+
+    categoryCard.addEventListener('click', async () => {
+      // Приховуємо категорії та завантажуємо вправи
+      const exercises = await fetchExercises(category.filter, category.name);
+      displayExercises(exercises);
+    });
+
+    exerciseContainer.appendChild(categoryCard);
+  });
 }
 
 function fetchExercisesByKeyword(filter, keyword) {
@@ -177,56 +145,56 @@ function fetchExercisesByKeyword(filter, keyword) {
 }
 
 function displayExercises(exercises) {
-    const exerciseContainer = document.querySelector('.exercise-container');
-    exerciseContainer.innerHTML = '';
+  const exerciseContainer = document.querySelector('.exercises-grid');
+  exerciseContainer.innerHTML = '';
 
-    if (exercises.length === 0) {
-        exerciseContainer.innerHTML = '<p>No exercises found.</p>';
-        return;
-    }
+  if (exercises.length === 0) {
+      exerciseContainer.innerHTML = '<p>No exercises found.</p>';
+      return;
+  }
 
-    const cards = exercises.map(({ bodyPart, burnedCalories, target, name, rating }) => `
-      <div class="exercise-card">
-        <div class="exercise-card-header">
-          <div class="label">WORKOUT</div>
-          <div class="rating">
-            <span>
-              ${rating}
-            </span>
-            <svg class="icon-star">
-              <use href="./img/icons/icons.svg#icon-star"></use>
-            </svg>
-          </div>
-          <button class="start-btn">
-            Start
-            <svg class="icon-arrow">
-              <use href="./img/icons/icons.svg#icon-arrow-start"></use>
-            </svg>
-          </button>
+  const cards = exercises.map(({ bodyPart, burnedCalories, target, name, rating }) => `
+    <div class="exercise-card">
+      <div class="exercise-card-header">
+        <div class="label">WORKOUT</div>
+        <div class="rating">
+          <span>
+            ${rating}
+          </span>
+          <svg class="icon-star">
+            <use href="./img/icons/icons.svg#icon-star"></use>
+          </svg>
         </div>
-        <div class="title-wrapper">
-          <div class="icon-run-exercises">
-            <svg class="icon-run">
-              <use href="./img/icons/icons.svg#icon-run"></use>
-            </svg>
-          </div>
-          <div class="title">${name}</div>
+        <button class="start-btn">
+          Start
+          <svg class="icon-arrow">
+            <use href="./img/icons/icons.svg#icon-arrow-start"></use>
+          </svg>
+        </button>
+      </div>
+      <div class="title-wrapper">
+        <div class="icon-run-exercises">
+          <svg class="icon-run">
+            <use href="./img/icons/icons.svg#icon-run"></use>
+          </svg>
         </div>
-        <div class="details">
-          <div class="details-item">
-            Burned calories: <span>${burnedCalories}</span>
-          </div>
-          <div class="details-item">
-            Body part: <span>${bodyPart}</span>
-          </div>
-          <div class="details-item">
-            Target:<span>${target}</span>
-          </div>
+        <div class="title">${name}</div>
+      </div>
+      <div class="details">
+        <div class="details-item">
+          Burned calories: <span>${burnedCalories}</span>
+        </div>
+        <div class="details-item">
+          Body part: <span>${bodyPart}</span>
+        </div>
+        <div class="details-item">
+          Target:<span>${target}</span>
         </div>
       </div>
-    `).join(' ');
+    </div>
+  `).join(' ');
 
-    exerciseContainer.insertAdjacentHTML('afterbegin', cards);
+  exerciseContainer.insertAdjacentHTML('afterbegin', cards);
 }
 
 

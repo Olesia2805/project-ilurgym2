@@ -157,6 +157,7 @@
 .exercise-card .details .details-item span {
   color: #242424;
   margin-left: 2px;
+  display: inline;
 }
 
 .exercise-card .details .details-item span:first-letter {
