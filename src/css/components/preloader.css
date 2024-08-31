@@ -24,6 +24,11 @@
 }
 @media screen and (min-width: 768px) {
   .loader {
+    font-size: 4em;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .loader {
     font-size: 6em;
   }
 }
