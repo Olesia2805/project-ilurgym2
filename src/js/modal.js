@@ -1,8 +1,8 @@
 import { addToFavorites, removeFromFavorites } from './favorites.js';
 import { renderFavorites } from './filters.js';
+import { showIziToast } from './services/iziToast.js';
 
 export function openExerciseModal(exerciseId, isFavoritesPage) {
-  console.log(`Fetching details for exercise ID: ${exerciseId}`);
   fetch(`https://your-energy.b.goit.study/api/exercises/${exerciseId}`)
     .then(response => {
       if (!response.ok) {
@@ -15,7 +15,7 @@ export function openExerciseModal(exerciseId, isFavoritesPage) {
       showModal(); // Показуємо модальне вікно після заповнення даними
     })
     .catch(error => {
-      console.error('Error fetching exercise details:', error);
+      showIziToast(`Error fetching exercise details: ${error}`, 'Error ❌');
     });
 }
 
@@ -69,9 +69,8 @@ function showModal() {
   const modal = document.querySelector('.modal');
   if (modal) {
     modal.classList.add('is-visible');
-    console.log('Modal is now visible.'); // Лог для перевірки
   } else {
-    console.error('Modal element is missing.');
+    showIziToast('Modal element is missing.', 'Error ❌');
   }
 }
 
@@ -79,9 +78,8 @@ function closeModal() {
   const modal = document.querySelector('.modal');
   if (modal) {
     modal.classList.remove('is-visible');
-    console.log('Modal is now hidden.'); // Лог для перевірки
   } else {
-    console.error('Modal element is missing.');
+    showIziToast('Modal element is missing.', 'Error ❌');
   }
 }
 
