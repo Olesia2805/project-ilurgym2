@@ -1,7 +1,9 @@
-.exercises-subcategory{
+.exercises-subcategory {
   font-size: 20px;
   line-height: 100%;
   color: rgba(36, 36, 36, 0.5);
+  display: block;
+  text-transform: capitalize;
 }
 
 .tabs {
@@ -29,9 +31,26 @@
   height: auto;
 }
 
+.exercises-header-span {
+  align-items: center;
+  margin-left: 8px;
+}
+
 @media screen and (min-width: 768px) {
   .exercise-card {
     width: calc(50% - 8px);
+  }
+  .exercises-subcategory {
+    font-size: 24px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .exercises-header-span {
+    align-items: flex-end;
+  }
+  .exercises-subcategory {
+    margin-bottom: 5px;
   }
 }
 
