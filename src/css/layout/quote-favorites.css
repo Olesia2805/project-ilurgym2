@@ -196,6 +196,10 @@
     min-width: 494px;
   }
 
+  .quote-section-wrapper {
+    max-width: 494px;
+  }
+
   .daily-norm-block {
     min-width: 239px;
     height: auto;
