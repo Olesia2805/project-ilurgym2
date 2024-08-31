@@ -158,10 +158,7 @@
   color: #242424;
   margin-left: 2px;
   display: inline;
-}
-
-.exercise-card .details .details-item span:first-letter {
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 .pagination {
@@ -214,5 +211,11 @@
   }
   .page {
     font-size: 24px;
+  }
+  .exercise-card .details .details-item:first-child,
+  .exercise-card .details .details-item:nth-child(2),
+  .exercise-card .details .details-item:nth-child(3) {
+    max-width: none;
+    width: auto;
   }
 }
