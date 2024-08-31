@@ -1,10 +1,12 @@
+import { showIziToast } from './services/iziToast.js';
+
 async function fetchQuote() {
   try {
     const response = await fetch('https://your-energy.b.goit.study/api/quote');
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error fetching the quote:', error);
+    showIziToast('Error fetching the quote:', 'Error ❌');
     return null;
   }
 }

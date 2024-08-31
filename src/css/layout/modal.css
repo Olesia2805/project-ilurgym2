@@ -85,12 +85,22 @@
 
 .modal__rating {
   margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
 }
 
 .modal__rating span:nth-child(1) {
   font-size: 12px;
   line-height: 18px;
   font-weight: 400;
+  margin-top: 2px;
+  display: block;
+}
+
+.modal__rating span:nth-child(2) {
+  display: flex;
+  gap: 2px;
 }
 
 .modal__rating_yellow {

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { showIziToast } from './services/iziToast.js';
 const fetchData = async (category, page) => {
   const screenWidth = window.innerWidth;
   const limit = screenWidth < 768 ? 9 : 12;
@@ -16,7 +17,7 @@ const fetchData = async (category, page) => {
 
     return response.data;
   } catch (error) {
-    console.error('Error fetching data:', error);
+    showIziToast(`Error fetching data: ${error}`, 'Error ❌');
     return null;
   }
 };
@@ -38,7 +39,7 @@ const fetchExercises = async page => {
 
     return response.data;
   } catch (error) {
-    console.error('Error fetching exercises data:', error);
+    showIziToast(`Error fetching exercises data: ${error}`, 'Error ❌');
     return null;
   }
 };

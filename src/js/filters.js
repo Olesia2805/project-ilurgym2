@@ -1,6 +1,8 @@
+import iziToast from 'izitoast';
 import { getFavorites, removeFromFavorites } from './favorites.js';
 import { openExerciseModal } from './modal.js';
 import { axiosInstance } from './services/api-service.js';
+import { showIziToast } from './services/iziToast.js';
 
 const FILTER = {
   MUSCLES: 'Muscles',
@@ -74,7 +76,7 @@ const fetchCategories = async (filter, page = 1) => {
       totalPages: 1,
     };
   } catch (error) {
-    console.error('Error fetching categories:', error);
+    showIziToast(`Error fetching categories: ${error}`, 'Error ❌');
     return {
       categories: [],
       page: 1,
@@ -111,7 +113,7 @@ const fetchExercises = async (filter, category, page = 1, keyword = null) => {
       totalPages: 1,
     };
   } catch (error) {
-    console.error('Error fetching categories:', error);
+    showIziToast(`Error fetching categories: ${error}`, 'Error ❌');
     return {
       exercises: [],
       page: 1,
@@ -226,27 +228,23 @@ const renderExercises = (exercises, isFavorites = false) => {
 
   document.querySelectorAll('.exercise-card .start-btn').forEach((card) => {
     const exerciseId = card.getAttribute('data-id');
-    console.log(`Exercise ID: ${exerciseId}`); // Лог ID вправи
     if (exerciseId) {
       card.addEventListener('click', () => {
         openExerciseModal(exerciseId, false); // Передаємо параметр false для інших сторінок
       });
     } else {
-      console.error('Exercise ID is missing.');
+      showIziToast(`Exercise ID is missing.`, 'Error ❌');
     }
   });
 
   document.querySelectorAll('.trash-btn').forEach((card) => {
     const exerciseId = card.getAttribute('data-id');
-    console.log(`Exercise ID: ${exerciseId}`);
-    console.log('card', card);
-    console.log('exerciseId', exerciseId);
     if (exerciseId) {
       card.addEventListener('click', () => {
         removeFromFavorites(exerciseId, renderFavorites);
       });
     } else {
-      console.error('Exercise ID is missing.');
+      showIziToast(`Exercise ID is missing.`, 'Error ❌');
     }
   });
 };

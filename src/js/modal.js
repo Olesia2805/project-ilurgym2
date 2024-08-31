@@ -1,8 +1,8 @@
 import { addToFavorites, removeFromFavorites } from './favorites.js';
 import { renderFavorites } from './filters.js';
+import { showIziToast } from './services/iziToast.js';
 
 export function openExerciseModal(exerciseId, isFavoritesPage) {
-  console.log(`Fetching details for exercise ID: ${exerciseId}`);
   fetch(`https://your-energy.b.goit.study/api/exercises/${exerciseId}`)
     .then(response => {
       if (!response.ok) {
@@ -15,9 +15,19 @@ export function openExerciseModal(exerciseId, isFavoritesPage) {
       showModal(); // Показуємо модальне вікно після заповнення даними
     })
     .catch(error => {
-      console.error('Error fetching exercise details:', error);
+      showIziToast(`Error fetching exercise details: ${error}`, 'Error ❌');
     });
 }
+
+const renderRating = (rating) => {
+  const fullStart = Math.round(rating);
+  const fullStarsMarkup = Array(fullStart).fill('<svg class="icon-star"><use href="./img/icons/icons.svg#icon-star"></use></svg>');
+  const emptyStarsMarkup = Array(5 - fullStart).fill('<svg class="icon-star"><use href="./img/icons/icons.svg#icon-star-empty"></use></svg>');
+  return `
+    ${fullStarsMarkup.join('')}
+    ${emptyStarsMarkup.join('')}
+  `
+};
 
 function fillExerciseModal(exercise) {
   const modalTitle = document.querySelector('.modal-title');
@@ -28,6 +38,7 @@ function fillExerciseModal(exercise) {
   const modalCalories = document.querySelector('.modal-calories');
   const modalDescription = document.querySelector('.modal__description');
   const modalBlock = document.querySelector('.modal__block');
+  const ratingBlock = document.querySelector('.modal__rating');
 
   // Зберігаємо ID вправи в атрибуті data-id модального вікна
   modalBlock.setAttribute('data-id', exercise._id);
@@ -41,6 +52,10 @@ function fillExerciseModal(exercise) {
   modalEquipment.textContent = exercise.equipment || 'No equipment available';
   modalCalories.textContent = `${exercise.burnedCalories || 'N/A'}`;
   modalDescription.textContent = exercise.description || 'No description available';
+  ratingBlock.innerHTML = `
+    <span>${exercise.rating}</span>
+    <span>${renderRating(exercise.rating)}</span>
+  `;
 
   // Оновлюємо кнопки в модальному вікні
   const modalButtons = document.querySelector('.modal__btns');
@@ -69,9 +84,8 @@ function showModal() {
   const modal = document.querySelector('.modal');
   if (modal) {
     modal.classList.add('is-visible');
-    console.log('Modal is now visible.'); // Лог для перевірки
   } else {
-    console.error('Modal element is missing.');
+    showIziToast('Modal element is missing.', 'Error ❌');
   }
 }
 
@@ -79,9 +93,8 @@ function closeModal() {
   const modal = document.querySelector('.modal');
   if (modal) {
     modal.classList.remove('is-visible');
-    console.log('Modal is now hidden.'); // Лог для перевірки
   } else {
-    console.error('Modal element is missing.');
+    showIziToast('Modal element is missing.', 'Error ❌');
   }
 }
 
