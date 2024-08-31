@@ -3,6 +3,7 @@ import { getFavorites, removeFromFavorites } from './favorites.js';
 import { openExerciseModal } from './modal.js';
 import { axiosInstance } from './services/api-service.js';
 import { showIziToast } from './services/iziToast.js';
+import icons from '../img/icons/icons.svg';
 
 const FILTER = {
   MUSCLES: 'Muscles',
@@ -164,7 +165,7 @@ const getRatingMarkup = (rating) => `
       ${rating}
     </span>
     <svg class="icon-star">
-      <use href="./img/icons/icons.svg#icon-star"></use>
+      <use href="${icons}#icon-star"></use>
     </svg>
   </div>
 `;
@@ -172,7 +173,7 @@ const getRatingMarkup = (rating) => `
 const getTrashButtonMarkup = (id) => `
   <button class="trash-btn" data-id="${id}">
     <svg width="16px" height="16px">
-      <use href="./img/icons/icons.svg#icon-trash"></use>
+      <use href="${icons}#icon-trash"></use>
     </svg>
   </button>
 `;
@@ -198,14 +199,14 @@ const renderExercises = (exercises, isFavorites = false) => {
         <button class="start-btn" data-id="${_id}">
           Start
           <svg class="icon-arrow">
-            <use href="./img/icons/icons.svg#icon-arrow-start"></use>
+            <use href="${icons}#icon-arrow-start"></use>
           </svg>
         </button>
       </div>
       <div class="title-wrapper">
         <div class="icon-run-exercises">
           <svg class="icon-run">
-            <use href="./img/icons/icons.svg#icon-run"></use>
+            <use href="${icons}#icon-run"></use>
           </svg>
         </div>
         <div class="title">${name}</div>

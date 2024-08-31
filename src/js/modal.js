@@ -1,6 +1,7 @@
 import { addToFavorites, removeFromFavorites } from './favorites.js';
 import { renderFavorites } from './filters.js';
 import { showIziToast } from './services/iziToast.js';
+import icons from '../img/icons/icons.svg';
 
 export function openExerciseModal(exerciseId, isFavoritesPage) {
   fetch(`https://your-energy.b.goit.study/api/exercises/${exerciseId}`)
@@ -21,8 +22,8 @@ export function openExerciseModal(exerciseId, isFavoritesPage) {
 
 const renderRating = (rating) => {
   const fullStart = Math.round(rating);
-  const fullStarsMarkup = Array(fullStart).fill('<svg class="icon-star"><use href="./img/icons/icons.svg#icon-star"></use></svg>');
-  const emptyStarsMarkup = Array(5 - fullStart).fill('<svg class="icon-star"><use href="./img/icons/icons.svg#icon-star-empty"></use></svg>');
+  const fullStarsMarkup = Array(fullStart).fill(`<svg class="icon-star"><use href="${icons}#icon-star"></use></svg>`);
+  const emptyStarsMarkup = Array(5 - fullStart).fill(`<svg class="icon-star"><use href="${icons}#icon-star-empty"></use></svg>`);
   return `
     ${fullStarsMarkup.join('')}
     ${emptyStarsMarkup.join('')}
