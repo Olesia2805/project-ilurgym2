@@ -189,7 +189,7 @@
   }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1440px) {
   .quote-section-wrapper {
     flex-direction: column;
     justify-content: flex-start;
