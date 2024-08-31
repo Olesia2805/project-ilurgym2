@@ -1,7 +1,7 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
-export const showIziToast = (message, color, title, time) => {
+export const showIziToast = (message, title, color, time) => {
   iziToast.show({
     message,
     drag: true,
@@ -11,7 +11,7 @@ export const showIziToast = (message, color, title, time) => {
     messageColor: '#2a2a2a',
     closeOnClick: true,
     animateInside: true,
-    backgroundColor: color ?? '#fca664',
+    backgroundColor: color ?? '#f4f4f4',
     title: title ?? '',
   });
 };

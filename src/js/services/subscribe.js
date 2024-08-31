@@ -12,9 +12,9 @@ async function handleSubmit(e) {
 
   try {
     await fetchApi.addSubscription({ email });
-    showIziToast('You have subscribed 🥳', '#f4f4f4', 'Congratulations!');
+    showIziToast('You have subscribed 🥳', 'Congratulations!', '#f4f4f4');
   } catch (err) {
-    showIziToast('Subscription already exists 😊', '#c6cdd1');
+    showIziToast('Subscription already exists 😊', '', '#c6cdd1');
   } finally {
     e.target.reset();
     localStorage.removeItem('subscribe-form-email');

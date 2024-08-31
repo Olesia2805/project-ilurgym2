@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const BASE_URL = 'https://your-energy.b.goit.study/api';
 
 export const fetchData = async (path, method, body) => {
@@ -47,3 +49,10 @@ export const fetchApi = {
     return await fetchData(url, method, body);
   },
 };
+
+export const axiosInstance = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    'Content-type': 'application/json',
+  },
+});

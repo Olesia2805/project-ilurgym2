@@ -53,6 +53,9 @@
   }
   .filters-wrapper {
     margin-bottom: 32px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
 }
 
