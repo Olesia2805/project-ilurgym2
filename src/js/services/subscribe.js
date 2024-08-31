@@ -4,44 +4,45 @@ import { fetchApi } from './api-service';
 
 const formEl = document.querySelector('.subscribe-form');
 
-formEl.addEventListener('submit', handleSubmit);
+if (formEl !== null) {
+  formEl.addEventListener('submit', handleSubmit);
 
-async function handleSubmit(e) {
-  e.preventDefault();
-  const email = e.target.elements.email.value;
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const email = e.target.elements.email.value;
 
-  try {
-    await fetchApi.addSubscription({ email });
-    showIziToast('You have subscribed 🥳', 'Congratulations!', '#f4f4f4');
-  } catch (err) {
-    showIziToast('Subscription already exists 😊', '', '#c6cdd1');
-  } finally {
-    e.target.reset();
-    localStorage.removeItem('subscribe-form-email');
-  }
-}
-
-const formData = { email: '' };
-
-const isEmpty = form => {
-  const formFromLS = JSON.parse(localStorage.getItem('subscribe-form-email'));
-  if (formFromLS !== null) {
-    for (const key in formFromLS) {
-      if (formFromLS.hasOwnProperty(key)) {
-        form.elements[key].value = formFromLS[key];
-        formData[key] = formFromLS[key];
-      }
+    try {
+      await fetchApi.addSubscription({ email });
+      showIziToast('You have subscribed 🥳', 'Congratulations!', '#f4f4f4');
+    } catch (err) {
+      showIziToast('Subscription already exists 😊', '', '#c6cdd1');
+    } finally {
+      e.target.reset();
+      localStorage.removeItem('subscribe-form-email');
     }
   }
-};
+  const formData = { email: '' };
 
-isEmpty(formEl);
+  const isEmpty = form => {
+    const formFromLS = JSON.parse(localStorage.getItem('subscribe-form-email'));
+    if (formFromLS !== null) {
+      for (const key in formFromLS) {
+        if (formFromLS.hasOwnProperty(key)) {
+          form.elements[key].value = formFromLS[key];
+          formData[key] = formFromLS[key];
+        }
+      }
+    }
+  };
 
-formEl.addEventListener('input', event => {
-  const nameField = event.target.name;
-  const valueField = event.target.value.trim();
+  isEmpty(formEl);
 
-  formData[nameField] = valueField;
+  formEl.addEventListener('input', event => {
+    const nameField = event.target.name;
+    const valueField = event.target.value.trim();
 
-  localStorage.setItem('subscribe-form-email', JSON.stringify(formData));
-});
+    formData[nameField] = valueField;
+
+    localStorage.setItem('subscribe-form-email', JSON.stringify(formData));
+  });
+}
