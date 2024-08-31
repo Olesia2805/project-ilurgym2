@@ -1,4 +1,21 @@
-h1.loader {
+.preloader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.preloader--hidden {
+  display: none;
+}
+
+.loader {
   text-align: center;
   text-transform: uppercase;
   font-size: 3em;
@@ -6,7 +23,7 @@ h1.loader {
   letter-spacing: 0.1em;
 }
 @media screen and (min-width: 768px) {
-  h1.loader {
+  .loader {
     font-size: 7em;
   }
 }
