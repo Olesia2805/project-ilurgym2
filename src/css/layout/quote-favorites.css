@@ -129,6 +129,7 @@
     justify-content: flex-start;
     flex-wrap: wrap;
     gap: 16px;
+    max-width: 494px;
   }
   .quote-dynamic-block {
     min-width: 704px;
