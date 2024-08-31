@@ -189,22 +189,20 @@ function displayExercises(exercises) {
       <div class="exercise-card">
         <div class="exercise-card-header">
           <div class="label">WORKOUT</div>
-          <div class="rating-wrapper">
-            <div class="rating">
+          <div class="rating">
+            <span>
               ${rating}
-              <svg class="icon-star">
-                <use href="./img/icons/icons.svg#icon-star"></use>
-              </svg>
-            </div>
-            <div class="start-btn-wrapper">
-              <div class="start-btn">
-                Start
-                <svg class="icon-arrow">
-                  <use href="./img/icons/icons.svg#icon-arrow-start"></use>
-                </svg>
-              </div>
-            </div>
+            </span>
+            <svg class="icon-star">
+              <use href="./img/icons/icons.svg#icon-star"></use>
+            </svg>
           </div>
+          <button class="start-btn">
+            Start
+            <svg class="icon-arrow">
+              <use href="./img/icons/icons.svg#icon-arrow-start"></use>
+            </svg>
+          </button>
         </div>
         <div class="title-wrapper">
           <div class="icon-run-exercises">
@@ -215,14 +213,14 @@ function displayExercises(exercises) {
           <div class="title">${name}</div>
         </div>
         <div class="details">
-          <div class="details-calories">
-            Burned calories: <span class="details-calories-info">${burnedCalories}</span>
+          <div class="details-item">
+            Burned calories: <span>${burnedCalories}</span>
           </div>
-          <div class="details-body-part">
-            Body part: <span class="details-body-part-info">${bodyPart}</span>
+          <div class="details-item">
+            Body part: <span>${bodyPart}</span>
           </div>
-          <div class="details-target">
-            Target:<span class="details-target-info">${target}</span>
+          <div class="details-item">
+            Target:<span>${target}</span>
           </div>
         </div>
       </div>
