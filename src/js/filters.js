@@ -13,6 +13,9 @@ const TYPE = {
 
 const MOBILE_SCREEN_WIDTH = 768;
 
+let currentFilter = FILTER.MUSCLES;
+let currentCategory = null;
+
 document.addEventListener('DOMContentLoaded',  async () => {
   // Ініціалізація першого завантаження категорій
   const { categories, page, totalPages } = await fetchCategories(FILTER.MUSCLES);
@@ -20,7 +23,6 @@ document.addEventListener('DOMContentLoaded',  async () => {
   renderPagination(TYPE.CATEGORY, page, totalPages, FILTER.MUSCLES);
 
   initFilterButtons();
-  initSearchForm();
 });
 
 const initFilterButtons = () => {
@@ -40,27 +42,6 @@ const initFilterButtons = () => {
     });
   });
 };
-
-const initSearchForm = () => {
-  const searchForm = document.getElementById('search-form');
-  const searchInput = document.getElementById('search-input');
-
-  searchForm.addEventListener('submit', function (event) {
-    event.preventDefault();
-    const keyword = searchInput.value.trim();
-    const activeFilterButton = document.querySelector('.filter-btn.active');
-
-    if (!activeFilterButton) {
-      console.error('No active filter button found.');
-      return;
-    }
-
-    const selectedFilter = activeFilterButton.getAttribute('data-filter');
-
-    // Викликаємо функцію для завантаження вправ за ключовим словом
-    // fetchExercisesByKeyword(selectedFilter, keyword);
-  });
-}
 
 const fetchCategories = async (filter, page = 1) => {
   const limit = window.innerWidth < MOBILE_SCREEN_WIDTH ? 9 : 12;
@@ -96,7 +77,7 @@ const fetchCategories = async (filter, page = 1) => {
   }
 };
 
-const fetchExercises = async (filter, category, page = 1) => {
+const fetchExercises = async (filter, category, page = 1, keyword = null) => {
   const limit = window.innerWidth < MOBILE_SCREEN_WIDTH ? 8 : 10;
 
   try {
@@ -107,6 +88,7 @@ const fetchExercises = async (filter, category, page = 1) => {
         ...(filter === FILTER.MUSCLES && { muscles: category }),
         ...(filter === FILTER.BODY_PARTS && { bodypart: category }),
         ...(filter === FILTER.EQUIPMENT && { equipment: category }),
+        ...(keyword && { keyword }),
       }
     });
     const data = response.data;
@@ -135,6 +117,8 @@ const fetchExercises = async (filter, category, page = 1) => {
 const renderCategories = (categories) => {
   const exerciseContainer = document.querySelector('.exercises-grid');
   exerciseContainer.innerHTML = '';
+  changeSearchFormVisibility(false);
+  updateFilterSectionHeader(false);
 
   if (categories.length === 0) {
     exerciseContainer.innerHTML = '<p>No categories found.</p>';
@@ -154,6 +138,8 @@ const renderCategories = (categories) => {
 
     categoryCard.addEventListener('click', async () => {
       const { exercises, page, totalPages } = await fetchExercises(category.filter, category.name);
+      currentFilter = category.filter;
+      currentCategory = category.name;
       renderExercises(exercises);
       renderPagination(TYPE.EXERCISE, page, totalPages, category.filter);
     });
@@ -166,6 +152,9 @@ const renderCategories = (categories) => {
 const renderExercises = (exercises) => {
   const exerciseContainer = document.querySelector('.exercises-grid');
   exerciseContainer.innerHTML = '';
+  changeSearchFormVisibility(true);
+  updateFilterSectionHeader(true, currentCategory);
+
 
   if (exercises.length === 0) {
     exerciseContainer.innerHTML = '<p>No exercises found.</p>';
@@ -229,8 +218,6 @@ const renderPagination = (
 
   const fragment = document.createDocumentFragment();
 
-  console.log('totalPages', totalPages);
-
   for (let i = 1; i <= totalPages; i++) {
     const pageButton = document.createElement('div');
     pageButton.innerText = i;
@@ -252,4 +239,37 @@ const renderPagination = (
   }
 
   pagination.appendChild(fragment);
-}
+};
+
+const changeSearchFormVisibility = (isVisible) => {
+  const searchForm = document.getElementById('search-form');
+  searchForm.style.display = isVisible ? 'block' : 'none';
+
+  if (isVisible) {
+    searchForm.addEventListener('submit', searchFormSubmitHandler);
+  } else {
+    searchForm.removeEventListener('submit', searchFormSubmitHandler);
+  }
+};
+
+const searchFormSubmitHandler = async (event) => {
+  event.preventDefault();
+  const searchInput = document.getElementById('search-input');
+
+  const value = searchInput.value.trim();
+  searchInput.value = '';
+
+  if (value === '') return;
+
+  const { exercises } = await fetchExercises(currentFilter, currentCategory, 1, value);
+  renderExercises(exercises);
+  renderPagination(TYPE.EXERCISE, 1, 1, currentFilter);
+
+};
+
+const updateFilterSectionHeader = (isVisible, filter = '') => {
+  const span = document.querySelector('.exercises-header-span');
+  const header = document.querySelector('.exercises-subcategory');
+  span.style.display = isVisible ? 'flex' : 'none';
+  header.textContent = filter;
+};

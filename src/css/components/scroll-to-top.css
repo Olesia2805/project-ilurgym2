@@ -26,7 +26,7 @@
 }
 
 #myBtn:hover {
-  background-color: var(--white-color);
+  opacity: .8;
 }
 
 #myBtn:hover svg {
