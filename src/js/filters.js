@@ -1,4 +1,3 @@
-import iziToast from 'izitoast';
 import { getFavorites, removeFromFavorites } from './favorites.js';
 import { openExerciseModal } from './modal.js';
 import { axiosInstance } from './services/api-service.js';
