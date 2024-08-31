@@ -186,13 +186,12 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 31px;
-  height: 31px;
   border-radius: 18px;
   font-weight: 500;
-  padding: 6px 12px;
   color: #242424;
+  padding: 3px;
   cursor: pointer;
+  min-width: 32px;
 }
 
 @media screen and (min-width: 768px) {
