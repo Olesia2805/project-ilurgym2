@@ -20,7 +20,7 @@
 }
 
 .modal__block {
-  background-color: #242424;
+  background-color: var(--primary-color);
   width: 704px;
   height: auto;
   border-radius: 20px;
@@ -61,7 +61,7 @@
 }
 
 .modal__content h2:first-letter {
-   text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .modal__exit {
@@ -72,7 +72,7 @@
   cursor: pointer;
   color: #f4f4f4;
   z-index: 1000;
-  width: 28px;  /* Додаємо ширину */
+  width: 28px; /* Додаємо ширину */
   height: 28px; /* Додаємо висоту */
   display: flex;
   align-items: center;
@@ -174,11 +174,19 @@
 .modal__btns button:nth-child(1) {
   background-color: #f4f4f4;
   color: #242424;
-  border: none;
+  border: 1px solid #f4f4f4;
+  transition: ease-in 250ms;
+}
+
+.modal__btns button:nth-child(1):hover,
+.modal__btns button:nth-child(1):focus {
+  background-color: #242424;
+  color: #f4f4f4;
 }
 
 .fa-heart {
   margin-left: 5px;
+  fill: #f4f4f4;
 }
 
 .modal__btns button:nth-child(2) {
@@ -186,6 +194,13 @@
   border: 1px solid #f4f4f4;
   background-color: #242424;
   color: #f4f4f4;
+  transition: ease-in 250ms;
+}
+
+.modal__btns button:nth-child(2):hover,
+.modal__btns button:nth-child(2):focus {
+  background-color: #f4f4f4;
+  color: #242424;
 }
 
 .rating-modal {
@@ -201,7 +216,7 @@
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.247);
   z-index: 10;
-  color: #f4f4f4;
+  color: var(--white-color);
 }
 
 .rating-modal.is-visible {
@@ -209,11 +224,11 @@
 }
 
 .rating-modal__block {
-  background-color: #242424;
-  width: 704px;
+  background-color: var(--primary-color);
+  width: 430px;
   height: auto;
   border-radius: 20px;
-  padding: 32px;
+  padding: 40px;
 
   display: flex;
   flex-direction: column;
@@ -230,7 +245,7 @@
   right: 16px;
   font-size: 28px;
   cursor: pointer;
-  color: #f4f4f4;
+  color: var(--white-color);
   z-index: 1000;
   width: 28px;
   height: 28px;
@@ -244,54 +259,70 @@
 }
 
 .rating-modal__title {
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 32px;
-  margin-bottom: 16px;
+  color: rgba(244, 244, 244, 0.4);
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.rating-modal__mark {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 32px;
 }
 
 .rating-modal__stars {
-  margin-bottom: 16px;
   display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.rating-modal__stars span {
-  font-size: 24px;
+  gap: 2px;
   cursor: pointer;
-  color: #eea10c;
 }
 
-.rating-modal__value {
-  font-size: 16px;
-  line-height: 18px;
-  margin-bottom: 16px;
-  text-align: center;
+.rating-modal__stars__item path:hover {
+  fill: #eea10c;
+  transition: fill-opacity 0.2s ease;
 }
 
 .rating-modal__input,
 .rating-modal__textarea {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 16px;
-  border-radius: 12px;
-  border: none;
-  font-size: 16px;
-  background-color: #3b3b3b;
+  padding: 12px 14px;
+  border: 1px solid #f4f4f4;
+  background-color: transparent;
+  outline: none;
   color: #fff;
+  font: inherit;
+  box-sizing: border-box;
+}
+
+.rating-modal__input {
+  margin-bottom: 16px;
+  border-radius: 30px;
+  font: inherit;
   box-sizing: border-box;
 }
 
 .rating-modal__textarea {
-  resize: vertical;
-  height: 80px; /* Висота текстової області */
+  resize: none;
+  height: 96px; /* Висота текстової області */
+  margin-bottom: 32px;
+  border-radius: 15px;
+}
+
+.rating-modal__input:hover,
+.rating-modal__textarea:hover {
+  box-shadow: 0 0 0.05rem #fff, 0 0 0.05rem #fff, 0 0 0.5rem var(--accent-color),
+    0 0 0.2rem var(--accent-color), 0 0 0.7rem var(--accent-color),
+    inset 0 0 0.375rem var(--accent-color);
+}
+
+.rating-modal__input:focus,
+.rating-modal__textarea:focus {
+  border: 1px solid var(--accent-color);
 }
 
 .rating-modal__btns {
   display: flex;
-  justify-content: flex-end;
-  gap: 10px;
+  justify-content: space-between;
 }
 
 .rating-modal__btn {
@@ -304,21 +335,42 @@
   cursor: pointer;
 }
 
+.rating-modal__submit-btn {
+  background-color: #f4f4f4;
+  color: #242424;
+  border: 1px solid #f4f4f4;
+  transition: ease-in 500ms;
+
+  background: linear-gradient(to right, #242424 50%, #f4f4f4 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all 0.5s ease-out;
+}
+
+.rating-modal__submit-btn:hover {
+  background-position: left bottom;
+  color: #f4f4f4;
+}
+
 .rating-modal__cancel-btn {
   background-color: #242424;
   color: #f4f4f4;
   border: 1px solid #f4f4f4;
 }
 
+.rating-modal__cancel-btn {
+  background-color: #242424;
+  color: #f4f4f4;
+  border: 1px solid #f4f4f4;
+  transition: ease-in 500ms;
+
+  background: linear-gradient(to right, #f4f4f4 50%, #242424 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all 0.5s ease-out;
+}
+
 .rating-modal__cancel-btn:hover {
-  background-color: #3b3b3b;
-}
-
-.rating-modal__submit-btn {
-  background-color: #f4f4f4;
+  background-position: left bottom;
   color: #242424;
-}
-
-.rating-modal__submit-btn:hover {
-  background-color: #e6e6e6;
 }
