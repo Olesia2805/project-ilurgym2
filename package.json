@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=/goit-advancedjs-fp/",
+    "build": "vite build --base=/project-ilurgym2/",
     "preview": "vite preview"
   },
   "devDependencies": {
