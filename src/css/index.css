@@ -21,3 +21,22 @@
 @import url(components/category-card.css);
 @import url(components/preloader.css);
 @import url(components/scroll-to-top.css);
+
+/* * {
+  scrollbar-width: 8px; 
+  scrollbar-color: #242424 rgba(36, 36, 36, 0.1);
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  border-radius: 12px;
+  background: rgba(36, 36, 36, 0.1);
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 12px;
+  background-color: #242424;
+} */

@@ -38,7 +38,7 @@
 }
 
 .filter-btn:hover {
-  background-color: #f0f0f0;
+  color: var(--accent-color);
 }
 
 .filters-wrapper {
