@@ -164,7 +164,7 @@ const getRatingMarkup = (rating) => `
       ${rating}
     </span>
     <svg class="icon-star">
-      <use href="${icons}#icon-star"></use>
+      <use href="${icons}#icon-star-full"></use>
     </svg>
   </div>
 `;
