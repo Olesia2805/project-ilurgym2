@@ -1,3 +1,19 @@
+.exercises {
+  padding-bottom: 80px;
+}
+
+@media screen and (min-width: 768px) {
+  .exercises {
+    padding-bottom: 100px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .exercises {
+    padding-bottom: 132px;
+  }
+}
+
 .exercises-header {
   display: flex;
   align-items: center;
@@ -216,9 +232,7 @@
   }
 }
 
-.exercises-container {
-  padding-bottom: 80px;
-}
+
 
 .exercises-wrapper {
   width: 100%;
@@ -242,7 +256,6 @@
 @media screen and (min-width: 768px) {
   .exercises-container {
     max-width: 769px;
-    padding-bottom: 100px;
   }
   .exercises-wrapper {
     margin-bottom: 64px;
@@ -255,7 +268,6 @@
 @media screen and (min-width: 1440px) {
   .exercises-container {
     max-width: 1440px;
-    padding-bottom: 132px;
   }
   .content-wrapper {
     flex-direction: row;
@@ -271,7 +283,7 @@
 }
 
 @media screen and (min-width: 768px) {
-  .exercises-header {
+  .exercises--favorites .exercises-header {
     margin-bottom: 32px;
   }
 }

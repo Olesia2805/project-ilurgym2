@@ -72,6 +72,24 @@
   width: 100%;
 }
 
+.modal__block-wrapper {
+  display: flex;
+  gap: 32px;
+}
+
+.modal__block-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 40px;
+}
+
+@media screen and (min-width: 768px) {
+  .modal__block-content {
+    gap: 64px;
+  }
+}
+
 .modal__content h2 {
   font-weight: 500;
   font-size: 24px;
@@ -195,6 +213,9 @@
   padding: 12px 24px 12px 24px;
   font-size: 15px;
   line-height: 24px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .modal__btns button:nth-child(1) {
@@ -405,4 +426,28 @@
 .rating-modal__cancel-btn:hover {
   background-position: left bottom;
   color: #242424;
+}
+
+.favorite-icon {
+  display: block;
+  transition: ease-in 250ms;
+}
+
+.favorite-icon--trash {
+  fill: var(--primary-color);
+}
+
+.favorite-icon--heart {
+  stroke: var(--primary-color);
+  fill: transparent;
+}
+
+.modal__btns button:nth-child(1):hover .favorite-icon--heart,
+.modal__btns button:nth-child(1):focus .favorite-icon--heart {
+  stroke: var(--white-color);
+}
+
+.modal__btns button:nth-child(1):hover .favorite-icon--trash,
+.modal__btns button:nth-child(1):focus .favorite-icon--trash {
+  fill: var(--white-color);
 }

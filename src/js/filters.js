@@ -140,7 +140,7 @@ const renderCategories = (categories) => {
     const categoryCard = document.createElement('div');
     categoryCard.classList.add('category-card');
     categoryCard.innerHTML = `
-      <img src="${category.imgURL}" alt="${category.name}" />
+      <img src="${category.imgURL}" alt="${category.name}" width="300px" height="300px"/>
       <h3>${category.name}</h3>
       <p>${category.filter}</p>
     `;
