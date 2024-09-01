@@ -21,13 +21,16 @@
 
 .modal__block {
   background-color: var(--primary-color);
-  width: 704px;
+  width: 100%;
+  max-width: 335px;
   height: auto;
   border-radius: 20px;
 
   display: flex;
   justify-content: space-between;
-  padding: 32px;
+  flex-direction: column;
+  padding: 40px 20px;
+  gap: 20px;
 
   position: fixed;
   top: 50%;
@@ -35,22 +38,38 @@
   transform: translate(-50%, -50%);
 }
 
+@media screen and (min-width: 768px) {
+  .modal__block {
+    flex-direction: row;
+    width: 100%;
+    max-width: 704px;
+    padding: 32px;
+    gap: 32px;
+  }
+}
+
 .modal__img {
   display: flex;
+  flex-shrink: 0;
 }
 
 .modal__img > img {
-  width: 270px;
-  height: 259px;
+  width: 100%;
+  height: auto;
   border-radius: 12px;
+}
+
+@media screen and (min-width: 768px) {
+  .modal__img > img {
+    width: 270px;
+    height: 259px;
+  }
 }
 
 .modal__content {
   display: flex;
   flex-direction: column;
-
-  width: 338px;
-  height: 100%;
+  width: 100%;
 }
 
 .modal__content h2 {
@@ -66,14 +85,13 @@
 
 .modal__exit {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  font-size: 28px;
+  top: 14px;
+  right: 14px;
   cursor: pointer;
   color: #f4f4f4;
   z-index: 1000;
-  width: 28px; /* Додаємо ширину */
-  height: 28px; /* Додаємо висоту */
+  width: 24px; /* Додаємо ширину */
+  height: 24px; /* Додаємо висоту */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -161,6 +179,14 @@
   margin-top: auto;
   display: flex;
   justify-content: flex-end;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .modal__btns {
+    flex-direction: row;
+  }
 }
 
 .modal__btns button {
@@ -190,7 +216,6 @@
 }
 
 .modal__btns button:nth-child(2) {
-  margin-left: 6px;
   border: 1px solid #f4f4f4;
   background-color: #242424;
   color: #f4f4f4;
@@ -267,6 +292,7 @@
 
 .rating-modal__mark {
   display: flex;
+  align-items: center;
   gap: 3px;
   margin-bottom: 32px;
 }
@@ -277,10 +303,16 @@
   cursor: pointer;
 }
 
-.rating-modal__stars__item path:hover {
-  fill: #eea10c;
+.rating-modal__stars span {
+  color: rgba(244, 244, 244, 0.2);
   transition: fill-opacity 0.2s ease;
 }
+
+.rating-modal__stars span.selected,
+.rating-modal__stars span:hover {
+  color: #eea10c;
+}
+
 
 .rating-modal__input,
 .rating-modal__textarea {
