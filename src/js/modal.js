@@ -101,8 +101,6 @@ function setupStarRating() {
     return;
   }
 
-  console.log('Rating stars HTML:', starsContainer.innerHTML);
-
   const stars = starsContainer.querySelectorAll('span');
 
   if (stars.length === 0) {
@@ -123,6 +121,7 @@ function setupStarRating() {
       if (ratingValueElement) {
         ratingValueElement.textContent = ratingValue.toFixed(1);
         ratingValueElement.setAttribute('data-selected-rating', ratingValue);
+
         console.log(`Selected star rating: ${ratingValue}`);
       } else {
         console.error('.rating-modal__value element not found');
@@ -241,19 +240,24 @@ document.addEventListener('DOMContentLoaded', function () {
           return response.json();
         })
         .then(data => {
-          alert('Rating submitted successfully!');
+          showIziToast(`Thank you for your feedback`, 'Done ✅');
           closeRatingModal();
         })
+
         .catch(error => {
           if (
             error.message.includes('Rating already submitted with this email')
           ) {
-            alert(
-              'You have already submitted a rating using this email address.'
+            showIziToast(
+              'You have already submitted a rating using this email address.',
+              'Error ❌'
             );
           } else {
             console.error('Error submitting rating:', error);
-            alert('Error submitting rating. Please try again later.');
+            showIziToast(
+              'Error submitting rating. Please try again later.',
+              'Error ❌'
+            );
           }
         });
     }
