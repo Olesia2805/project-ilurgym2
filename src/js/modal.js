@@ -29,6 +29,32 @@ function openRatingModal() {
     const ratingModal = document.getElementById('ratingModal');
     if (ratingModal) {
       resetRatingForm(); // Очищаємо форму перед відкриттям модального вікна
+
+      // Завантаження даних рейтингу з локального сховища
+      const savedRating = loadRatingFromLocalStorage(exerciseId);
+      if (savedRating) {
+        document.querySelector('.rating-modal__email').value =
+          savedRating.email;
+        document.querySelector('.rating-modal__comment').value =
+          savedRating.review;
+        const ratingValueElement = document.querySelector(
+          '.rating-modal__value'
+        );
+        if (ratingValueElement) {
+          ratingValueElement.textContent = savedRating.rate.toFixed(1);
+          ratingValueElement.setAttribute(
+            'data-selected-rating',
+            savedRating.rate
+          );
+        }
+        const stars = document.querySelectorAll('.rating-modal__stars span');
+        stars.forEach((star, index) => {
+          if (index < savedRating.rate) {
+            star.classList.add('selected');
+          }
+        });
+      }
+
       ratingModal.setAttribute('data-exercise-id', exerciseId);
       ratingModal.classList.add('is-visible');
       setupStarRating(); // Ініціалізуємо зірочки при відкритті модального вікна рейтингу
@@ -186,6 +212,9 @@ document.addEventListener('DOMContentLoaded', function () {
         review: comment,
       };
 
+      // Збереження рейтингу до локального сховища
+      saveRatingToLocalStorage(exerciseId, requestData);
+
       fetch(
         `https://your-energy.b.goit.study/api/exercises/${exerciseId}/rating`,
         {
@@ -234,6 +263,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+
+function saveRatingToLocalStorage(exerciseId, ratingData) {
+  const ratings = JSON.parse(localStorage.getItem('exerciseRatings')) || {};
+  ratings[exerciseId] = ratingData;
+  localStorage.setItem('exerciseRatings', JSON.stringify(ratings));
+}
+
+function loadRatingFromLocalStorage(exerciseId) {
+  const ratings = JSON.parse(localStorage.getItem('exerciseRatings')) || {};
+  return ratings[exerciseId] || null;
+}
 
 const renderRating = rating => {
   const fullStars = Math.round(rating);
@@ -358,4 +398,4 @@ const closeModalHandler = (event) => {
   if (event.key === 'Escape') {
     closeModal();
   }
-}
+};
