@@ -2,15 +2,10 @@ import { addToFavorites, removeFromFavorites } from './favorites.js';
 import { renderFavorites } from './filters.js';
 import { showIziToast } from './services/iziToast.js';
 import icons from '../img/icons/icons.svg';
+import { fetchApi } from './services/api-service';
 
 export function openExerciseModal(exerciseId, isFavoritesPage) {
-  fetch(`https://your-energy.b.goit.study/api/exercises/${exerciseId}`)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Failed to fetch exercise details.');
-      }
-      return response.json();
-    })
+  fetchApi.getExercisesId(exerciseId)
     .then(exercise => {
       fillExerciseModal(exercise, isFavoritesPage);
       showModal(); // Показуємо модальне вікно після заповнення даними
@@ -29,6 +24,7 @@ function openRatingModal() {
     const ratingModal = document.getElementById('ratingModal');
     if (ratingModal) {
       resetRatingForm(); // Очищаємо форму перед відкриттям модального вікна
+      loadRatingFormData(); // Завантажуємо дані з Local Storage
       ratingModal.setAttribute('data-exercise-id', exerciseId);
       ratingModal.classList.add('is-visible');
       setupStarRating(); // Ініціалізуємо зірочки при відкритті модального вікна рейтингу
@@ -113,6 +109,11 @@ function setupStarRating() {
       if (ratingValueElement) {
         ratingValueElement.textContent = ratingValue.toFixed(1);
         ratingValueElement.setAttribute('data-selected-rating', ratingValue);
+
+        // Збереження рейтингу в Local Storage
+        const formData = JSON.parse(localStorage.getItem('rating-form-data')) || {};
+        formData.rating = ratingValue;
+        localStorage.setItem('rating-form-data', JSON.stringify(formData));
       }
     });
   });
@@ -140,7 +141,53 @@ function resetRatingForm() {
     ratingValue.textContent = '0.0';
     ratingValue.removeAttribute('data-selected-rating');
   }
+
+  // Очищення Local Storage
+  localStorage.removeItem('rating-form-data');
 }
+
+function loadRatingFormData() {
+  const formFromLS = JSON.parse(localStorage.getItem('rating-form-data'));
+  if (formFromLS !== null) {
+    if (formFromLS.email) {
+      document.querySelector('.rating-modal__email').value = formFromLS.email;
+    }
+    if (formFromLS.comment) {
+      document.querySelector('.rating-modal__comment').value = formFromLS.comment;
+    }
+    if (formFromLS.rating) {
+      const stars = document.querySelectorAll('.rating-modal__stars span');
+      stars.forEach((star, index) => {
+        if (index < formFromLS.rating) {
+          star.classList.add('selected');
+        }
+      });
+      document.querySelector('.rating-modal__value').textContent = formFromLS.rating;
+      document.querySelector('.rating-modal__value').setAttribute('data-selected-rating', formFromLS.rating);
+    }
+  }
+}
+
+document.addEventListener('input', event => {
+  if (
+    event.target.matches('.rating-modal__email') ||
+    event.target.matches('.rating-modal__comment')
+  ) {
+    const email = document.querySelector('.rating-modal__email')?.value.trim();
+    const comment = document.querySelector('.rating-modal__comment')?.value.trim();
+    const selectedRating = document
+      .querySelector('.rating-modal__value')
+      ?.getAttribute('data-selected-rating');
+
+    const ratingFormData = {
+      email: email || '',
+      comment: comment || '',
+      rating: selectedRating || ''
+    };
+
+    localStorage.setItem('rating-form-data', JSON.stringify(ratingFormData));
+  }
+});
 
 document.addEventListener('DOMContentLoaded', function () {
   document.addEventListener('click', function (event) {
@@ -186,37 +233,14 @@ document.addEventListener('DOMContentLoaded', function () {
         review: comment,
       };
 
-      fetch(
-        `https://your-energy.b.goit.study/api/exercises/${exerciseId}/rating`,
-        {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(requestData),
-        }
-      )
-        .then(response => {
-          if (response.status === 409) {
-            return response.json().then(err => {
-              throw new Error(
-                `Rating already submitted with this email: ${err.message}`
-              );
-            });
-          }
-          if (!response.ok) {
-            return response.json().then(err => {
-              throw new Error(`Failed to submit rating: ${err.message}`);
-            });
-          }
-          return response.json();
-        })
+      fetchApi.editExercisesIdRating(exerciseId, requestData)  // Використання fetchApi для відправки рейтингу
         .then(data => {
           showIziToast(`Thank you for your feedback`, 'Done ✅');
+          localStorage.removeItem('rating-form-data'); // Очищення Local Storage після успішного відправлення
           closeRatingModal();
         })
-
         .catch(error => {
+          console.error('Error details:', error);
           if (
             error.message.includes('Rating already submitted with this email')
           ) {
