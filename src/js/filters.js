@@ -1,5 +1,5 @@
 import { getFavorites, removeFromFavorites } from './favorites.js';
-import { openExerciseModal } from './modal.js';
+import { showModal } from './modal.js';
 import { axiosInstance } from './services/api-service.js';
 import { showIziToast } from './services/iziToast.js';
 import icons from '../img/icons/icons.svg';
@@ -229,8 +229,8 @@ const renderExercises = (exercises, isFavorites = false) => {
   document.querySelectorAll('.exercise-card .start-btn').forEach((card) => {
     const exerciseId = card.getAttribute('data-id');
     if (exerciseId) {
-      card.addEventListener('click', () => {
-        openExerciseModal(exerciseId, false); // Передаємо параметр false для інших сторінок
+      card.addEventListener('click', async () => {
+        await showModal(exerciseId); // Передаємо параметр false для інших сторінок
       });
     } else {
       showIziToast(`Exercise ID is missing.`, 'Error ❌');
