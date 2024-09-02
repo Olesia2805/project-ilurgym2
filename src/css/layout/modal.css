@@ -1,5 +1,5 @@
 .modal {
-  display: none; /* Початково приховано */
+  display: flex;
   justify-content: center;
   align-items: center;
 
@@ -16,7 +16,7 @@
 }
 
 .modal.is-visible {
-  display: flex; /* Показуємо модальне вікно, коли додається клас is-visible */
+  display: flex;
 }
 
 .modal__block {

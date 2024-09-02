@@ -1,18 +1,17 @@
-import { addToFavorites, removeFromFavorites } from './favorites.js';
+import { addToFavorites, getFavorites, removeFromFavorites } from './favorites.js';
 import { renderFavorites } from './filters.js';
 import { showIziToast } from './services/iziToast.js';
 import icons from '../img/icons/icons.svg';
 import { fetchApi } from './services/api-service';
 
-export function openExerciseModal(exerciseId, isFavoritesPage) {
-  fetchApi.getExercisesId(exerciseId)
-    .then(exercise => {
-      fillExerciseModal(exercise, isFavoritesPage);
-      showModal(); // Показуємо модальне вікно після заповнення даними
-    })
-    .catch(error => {
-      showIziToast(`Error fetching exercise details: ${error}`, 'Error ❌');
-    });
+const getExerciseById = async (exerciseId) => {
+  const favorites = getFavorites();
+  const isFavorite = favorites.find(item => item._id === exerciseId);
+  const exercise = await fetchApi.getExercisesId(exerciseId);
+  return {
+    exercise,
+    isFavorite,
+  }
 }
 
 function openRatingModal() {
@@ -240,7 +239,6 @@ document.addEventListener('DOMContentLoaded', function () {
           closeRatingModal();
         })
         .catch(error => {
-          console.error('Error details:', error);
           if (
             error.message.includes('Rating already submitted with this email')
           ) {
@@ -274,112 +272,144 @@ const renderRating = rating => {
   `;
 };
 
-const handlerVisibility = (nodes, isVisible) => {
-  nodes.forEach((node) => node.style.display = isVisible ? 'block' : 'none');
-};
+const renderFavoriteOpenButton = () => `
+  <span class="js-favorite-add">Add to favorites</span>
+  <svg class="js-favorite-add favorite-icon favorite-icon--heart" width="20" height="20">
+    <use href="./img/icons/icons.svg#icon-heart" />
+  </svg>
+`
 
-function fillExerciseModal(exercise) {
-  const modalTitle = document.querySelector('.modal-title');
-  const modalImage = document.querySelector('.modal-image');
-  const modalTarget = document.querySelector('.modal-target');
-  const modalBodyPart = document.querySelector('.modal-bodyPart');
-  const modalEquipment = document.querySelector('.modal-equipment');
-  const modalCalories = document.querySelector('.modal-calories');
-  const modalDescription = document.querySelector('.modal__description');
-  const modalBlock = document.querySelector('.modal__block');
-  const ratingBlock = document.querySelector('.modal__rating');
+const renderFavoriteCloseButton = () => `
+  <span class="js-favorite-remove">Remove from favorites</span>
+  <svg class="js-favorite-remove favorite-icon favorite-icon--trash" width="20" height="20">
+    <use href="./img/icons/icons.svg#icon-trash" />
+  </svg>
+`
 
-  // Зберігаємо ID вправи в атрибуті data-id модального вікна
-  modalBlock.setAttribute('data-id', exercise._id);
+const getMarkupExerciseModalWindow = (exercise, isFavorite) => `
+  <div class="modal">
+    <div class="modal__block" data-id="${exercise._id}">
+      <div class="modal__block-content">
+        <div class="modal__block-wrapper">
+          <svg class="modal__exit modal-close">
+            <use href="./img/icons/icons.svg#icon-close"></use>
+          </svg>
+          <div class="modal__img">
+            <img src="${exercise.gifUrl || ''}" class="modal-image" alt="${exercise.name || 'Exercise image'}" />
+          </div>
+          <div class="modal__content">
+            <h2 class="modal-title">${exercise.name || 'No name available'}</h2>
+            <div class="modal__rating">
+              <span>${exercise.rating}</span>
+              <span>${renderRating(exercise.rating)}</span>
+            </div>
+            <div class="modal__info">
+              <div>
+                <div>Target</div>
+                <div class="modal-target">${exercise.target || 'No target available'}</div>
+              </div>
+              <div>
+                <div>Body Part</div>
+                <div class="modal-bodyPart">${exercise.bodyPart || 'No body part available'}</div>
+              </div>
+              <div>
+                <div>Equipment</div>
+                <div class="modal-equipment">${exercise.equipment || 'No equipment available'}</div>
+              </div>
+              <div>
+                <div>Popular</div>
+                <div class="modal-popular">${exercise.popularity || 0}</div>
+              </div>
+              <div>
+                <div>Burned calories</div>
+                <div class="modal-calories">${exercise.burnedCalories || 'N/A'}</div>
+              </div>
+            </div>
+            <p class="modal__description">
+              ${exercise.description || 'No description available'}
+            </p>
+          </div>
+        </div>
+        <div class="modal__btns">
+          <button class="favorites-btn" data-id="${exercise._id}">
+            ${isFavorite ? renderFavoriteCloseButton() : renderFavoriteOpenButton()}
+          </button>
+          <button class="rating-btn">Give a rating</button>
+        </div>
+      </div>
+    </div>
+  </div>
+`
 
-  // Заповнення даних модального вікна
-  modalTitle.textContent = exercise.name || 'No name available';
-  modalImage.src = exercise.gifUrl || '';
-  modalImage.alt = exercise.name || 'Exercise image';
-  modalTarget.textContent = exercise.target || 'No target available';
-  modalBodyPart.textContent = exercise.bodyPart || 'No body part available';
-  modalEquipment.textContent = exercise.equipment || 'No equipment available';
-  modalCalories.textContent = `${exercise.burnedCalories || 'N/A'}`;
-  modalDescription.textContent =
-    exercise.description || 'No description available';
-  ratingBlock.innerHTML = `
-    <span>${exercise.rating}</span>
-    <span>${renderRating(exercise.rating)}</span>
-  `;
-  const removeButton = document.querySelectorAll('.js-favorite-remove');
-  const addButton = document.querySelectorAll('.js-favorite-add');
+export async function showModal(exerciseId) {
+  const { exercise, isFavorite } = await getExerciseById(exerciseId);
 
-  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-  const isFavorite = favorites.find(item => item._id === exercise._id);
-
-  handlerVisibility(removeButton, isFavorite);
-  handlerVisibility(addButton, !isFavorite);
+  const modal = getMarkupExerciseModalWindow(exercise, isFavorite);
+  document.body.insertAdjacentHTML('beforeend', modal);
 
   const favoritesButton = document.querySelector('.favorites-btn');
-  const favoritesContainer = document.getElementById('favorites');
+  favoritesButton.addEventListener('click', favoriteClickEventHandler(favoritesButton));
 
-  favoritesButton.addEventListener('click', function (e) {
-    e.stopImmediatePropagation();
-    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    const isFavorite = favorites.find(item => item._id === exercise._id);
-
-    if (isFavorite) {
-      const removeFavoriteCallback = favoritesContainer
-        ? renderFavorites
-        : undefined;
-      removeFromFavorites(exercise._id, removeFavoriteCallback);
-      handlerVisibility(removeButton, false);
-      handlerVisibility(addButton, true);
-    } else {
-      addToFavorites(exercise);
-      handlerVisibility(removeButton, true);
-      handlerVisibility(addButton, false);
-    }
-    favoritesButton.blur();
-  });
-}
-
-function showModal() {
-  const modal = document.querySelector('.modal');
-  if (modal) {
-    modal.classList.add('is-visible');
-    document.addEventListener('keydown', closeModalHandler);
-  } else {
-    showIziToast('Modal element is missing.', 'Error ❌');
-  }
+  document.addEventListener('keydown', closeModalHandler);
 }
 
 function closeModal() {
   const modal = document.querySelector('.modal');
+
+  const favoritesButton = document.querySelector('.favorites-btn');
+  favoritesButton.removeEventListener('click', favoriteClickEventHandler(favoritesButton));
   if (modal) {
-    modal.classList.remove('is-visible');
+    modal.remove();
     document.removeEventListener('keydown', closeModalHandler);
   } else {
     showIziToast('Modal element is missing.', 'Error ❌');
   }
 }
 
-const closeModalButton = document.querySelector('.modal-close');
-if (closeModalButton) {
-  closeModalButton.addEventListener('click', closeModal);
-}
-
-// Закриття модального вікна при натисканні за його межами
-document.addEventListener('click', (event) => {
-  const modal = document.querySelector('.modal');
-  const modalBlock = document.querySelector('.modal__block');
-  if (
-    modal &&
-    modalBlock &&
-    modal.classList.contains('is-visible') &&
-    !modalBlock.contains(event.target)
-  ) {
-    closeModal();
-  }
-});
-
 const closeModalHandler = (event) => {
   if (event.key === 'Escape') {
     closeModal();
   }
 }
+
+const favoriteClickEventHandler = (favoritesButton) => async () => {
+  const exerciseId = favoritesButton.getAttribute('data-id');
+
+  const favoritesContainer = document.getElementById('favorites');
+  const { exercise, isFavorite } = await getExerciseById(exerciseId);
+
+  if (isFavorite) {
+    const removeFavoriteCallback = favoritesContainer
+      ? renderFavorites
+      : undefined;
+    removeFromFavorites(exercise._id, removeFavoriteCallback);
+  } else {
+    addToFavorites(exercise);
+  }
+  favoritesButton.innerHTML = !isFavorite ? renderFavoriteCloseButton() : renderFavoriteOpenButton();
+};
+
+const closeModalEventHandler = (closeModalButton) => {
+  closeModalButton.addEventListener('click', closeModal);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('click', (event) => {
+    const modal = document.querySelector('.modal');
+    const modalBlock = modal?.querySelector('.modal__block');
+
+    if (
+      modal &&
+      modalBlock &&
+      !modalBlock.contains(event.target)
+    ) {
+      closeModal();
+    }
+
+    const closeModalButton = document.querySelector('.modal-close');
+
+    if (closeModalButton) {
+      closeModalEventHandler(closeModalButton);
+    }
+  });
+});
