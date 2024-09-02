@@ -275,14 +275,14 @@ const renderRating = rating => {
 const renderFavoriteOpenButton = () => `
   <span class="js-favorite-add">Add to favorites</span>
   <svg class="js-favorite-add favorite-icon favorite-icon--heart" width="20" height="20">
-    <use href="./img/icons/icons.svg#icon-heart" />
+    <use href="${icons}#icon-heart" />
   </svg>
 `
 
 const renderFavoriteCloseButton = () => `
   <span class="js-favorite-remove">Remove from favorites</span>
   <svg class="js-favorite-remove favorite-icon favorite-icon--trash" width="20" height="20">
-    <use href="./img/icons/icons.svg#icon-trash" />
+    <use href="${icons}#icon-trash" />
   </svg>
 `
 
