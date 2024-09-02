@@ -74,6 +74,7 @@
 
 .modal__block-wrapper {
   display: flex;
+  flex-direction: column;
   gap: 32px;
 }
 
@@ -88,14 +89,18 @@
   .modal__block-content {
     gap: 64px;
   }
+  .modal__block-wrapper {
+    flex-direction: row;
+  }
 }
 
 .modal__content h2 {
   font-weight: 500;
-  font-size: 24px;
-  line-height: 32px;
+  font-size: 20px;
+  line-height: 1em;
   margin-bottom: 10px;
 }
+
 
 .modal__content h2:first-letter {
   text-transform: uppercase;
@@ -199,9 +204,14 @@
   justify-content: flex-end;
   flex-direction: column;
   gap: 10px;
+  width: 100%;
 }
 
 @media screen and (min-width: 768px) {
+  .modal__content h2 {
+    font-size: 24px;
+    line-height: 32px;
+  }
   .modal__btns {
     flex-direction: row;
   }
@@ -216,6 +226,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  justify-content: center;
 }
 
 .modal__btns button:nth-child(1) {
