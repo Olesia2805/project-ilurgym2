@@ -71,7 +71,6 @@
 
 /* Права колонка з фільтрами та вправами */
 
-
 .quote-author {
   font-size: 14px;
   line-height: 129%;
@@ -232,8 +231,6 @@
   }
 }
 
-
-
 .exercises-wrapper {
   width: 100%;
   margin-bottom: 80px;
@@ -285,5 +282,23 @@
 @media screen and (min-width: 768px) {
   .exercises--favorites .exercises-header {
     margin-bottom: 32px;
+  }
+}
+
+.scrollable-grid {
+  padding-right: 15px;
+  height: 1268px;
+  overflow-y: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .scrollable-grid {
+    height: 835px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .scrollable-grid {
+    height: 490px;
   }
 }
