@@ -2,15 +2,10 @@ import { addToFavorites, removeFromFavorites } from './favorites.js';
 import { renderFavorites } from './filters.js';
 import { showIziToast } from './services/iziToast.js';
 import icons from '../img/icons/icons.svg';
+import { fetchApi } from './services/api-service';
 
 export function openExerciseModal(exerciseId, isFavoritesPage) {
-  fetch(`https://your-energy.b.goit.study/api/exercises/${exerciseId}`)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Failed to fetch exercise details.');
-      }
-      return response.json();
-    })
+  fetchApi.getExercisesId(exerciseId)
     .then(exercise => {
       fillExerciseModal(exercise, isFavoritesPage);
       showModal(); // Показуємо модальне вікно після заповнення даними
@@ -29,9 +24,13 @@ function openRatingModal() {
     const ratingModal = document.getElementById('ratingModal');
     if (ratingModal) {
       resetRatingForm(); // Очищаємо форму перед відкриттям модального вікна
+      loadRatingFormData(); // Завантажуємо дані з Local Storage
       ratingModal.setAttribute('data-exercise-id', exerciseId);
       ratingModal.classList.add('is-visible');
       setupStarRating(); // Ініціалізуємо зірочки при відкритті модального вікна рейтингу
+
+      // Закриття модального вікна по натисканню на клавішу Esc
+      document.addEventListener('keydown', closeRatingModalHandler);
     }
   } else {
     showIziToast(
@@ -60,12 +59,11 @@ document.addEventListener('click', function (event) {
   }
 });
 
-// Закриття модального вікна по натисканню на клавішу Esc
-document.addEventListener('keydown', function (event) {
+const closeRatingModalHandler = (event) => {
   if (event.key === 'Escape') {
     closeRatingModal();
   }
-});
+};
 
 // Закриття модального вікна по кліку на кнопці Cancel
 document.addEventListener('click', function (event) {
@@ -80,6 +78,7 @@ function closeRatingModal() {
   if (ratingModal) {
     ratingModal.classList.remove('is-visible');
     resetRatingForm(); // Скидаємо форму після закриття модального вікна
+    document.removeEventListener('keydown', closeRatingModalHandler);
   }
 }
 
@@ -110,6 +109,11 @@ function setupStarRating() {
       if (ratingValueElement) {
         ratingValueElement.textContent = ratingValue.toFixed(1);
         ratingValueElement.setAttribute('data-selected-rating', ratingValue);
+
+        // Збереження рейтингу в Local Storage
+        const formData = JSON.parse(localStorage.getItem('rating-form-data')) || {};
+        formData.rating = ratingValue;
+        localStorage.setItem('rating-form-data', JSON.stringify(formData));
       }
     });
   });
@@ -137,7 +141,53 @@ function resetRatingForm() {
     ratingValue.textContent = '0.0';
     ratingValue.removeAttribute('data-selected-rating');
   }
+
+  // Очищення Local Storage
+  localStorage.removeItem('rating-form-data');
 }
+
+function loadRatingFormData() {
+  const formFromLS = JSON.parse(localStorage.getItem('rating-form-data'));
+  if (formFromLS !== null) {
+    if (formFromLS.email) {
+      document.querySelector('.rating-modal__email').value = formFromLS.email;
+    }
+    if (formFromLS.comment) {
+      document.querySelector('.rating-modal__comment').value = formFromLS.comment;
+    }
+    if (formFromLS.rating) {
+      const stars = document.querySelectorAll('.rating-modal__stars span');
+      stars.forEach((star, index) => {
+        if (index < formFromLS.rating) {
+          star.classList.add('selected');
+        }
+      });
+      document.querySelector('.rating-modal__value').textContent = formFromLS.rating;
+      document.querySelector('.rating-modal__value').setAttribute('data-selected-rating', formFromLS.rating);
+    }
+  }
+}
+
+document.addEventListener('input', event => {
+  if (
+    event.target.matches('.rating-modal__email') ||
+    event.target.matches('.rating-modal__comment')
+  ) {
+    const email = document.querySelector('.rating-modal__email')?.value.trim();
+    const comment = document.querySelector('.rating-modal__comment')?.value.trim();
+    const selectedRating = document
+      .querySelector('.rating-modal__value')
+      ?.getAttribute('data-selected-rating');
+
+    const ratingFormData = {
+      email: email || '',
+      comment: comment || '',
+      rating: selectedRating || ''
+    };
+
+    localStorage.setItem('rating-form-data', JSON.stringify(ratingFormData));
+  }
+});
 
 document.addEventListener('DOMContentLoaded', function () {
   document.addEventListener('click', function (event) {
@@ -149,7 +199,6 @@ document.addEventListener('DOMContentLoaded', function () {
       const exerciseId = ratingModal?.getAttribute('data-exercise-id');
 
       if (!exerciseId) {
-        alert('Exercise ID is missing.');
         return;
       }
 
@@ -157,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .querySelector('.rating-modal__value')
         ?.getAttribute('data-selected-rating');
       if (!selectedRating) {
-        alert('Please select a rating.');
+        showIziToast('Please select a rating.', 'Error ❌');
         return;
       }
 
@@ -169,12 +218,12 @@ document.addEventListener('DOMContentLoaded', function () {
         ?.value.trim();
 
       if (!selectedRating || !email || !comment) {
-        alert('Please fill out all fields.');
+        showIziToast('Please fill in all fields.', 'Error ❌');
         return;
       }
 
       if (!validateEmail(email)) {
-        alert('Please enter a valid email address.');
+        showIziToast('Please enter a valid email address.', 'Error ❌');
         return;
       }
 
@@ -184,37 +233,14 @@ document.addEventListener('DOMContentLoaded', function () {
         review: comment,
       };
 
-      fetch(
-        `https://your-energy.b.goit.study/api/exercises/${exerciseId}/rating`,
-        {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(requestData),
-        }
-      )
-        .then(response => {
-          if (response.status === 409) {
-            return response.json().then(err => {
-              throw new Error(
-                `Rating already submitted with this email: ${err.message}`
-              );
-            });
-          }
-          if (!response.ok) {
-            return response.json().then(err => {
-              throw new Error(`Failed to submit rating: ${err.message}`);
-            });
-          }
-          return response.json();
-        })
+      fetchApi.editExercisesIdRating(exerciseId, requestData)  // Використання fetchApi для відправки рейтингу
         .then(data => {
           showIziToast(`Thank you for your feedback`, 'Done ✅');
+          localStorage.removeItem('rating-form-data'); // Очищення Local Storage після успішного відправлення
           closeRatingModal();
         })
-
         .catch(error => {
+          console.error('Error details:', error);
           if (
             error.message.includes('Rating already submitted with this email')
           ) {
@@ -248,6 +274,10 @@ const renderRating = rating => {
   `;
 };
 
+const handlerVisibility = (nodes, isVisible) => {
+  nodes.forEach((node) => node.style.display = isVisible ? 'block' : 'none');
+};
+
 function fillExerciseModal(exercise) {
   const modalTitle = document.querySelector('.modal-title');
   const modalImage = document.querySelector('.modal-image');
@@ -276,31 +306,36 @@ function fillExerciseModal(exercise) {
     <span>${exercise.rating}</span>
     <span>${renderRating(exercise.rating)}</span>
   `;
+  const removeButton = document.querySelectorAll('.js-favorite-remove');
+  const addButton = document.querySelectorAll('.js-favorite-add');
 
-  // Оновлюємо кнопки в модальному вікні
-  const modalButtons = document.querySelector('.modal__btns');
   const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
   const isFavorite = favorites.find(item => item._id === exercise._id);
 
-  modalButtons.innerHTML = `
-    <button class="favorites-btn">
-      ${isFavorite ? 'Remove' : 'Add to favorites'}
-      ${isFavorite ? '' : '<svg class="fa-heart" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">\n  <path d="M17.3666 3.84172C16.941 3.41589 16.4356 3.0781 15.8794 2.84763C15.3232 2.61716 14.727 2.49854 14.1249 2.49854C13.5229 2.49854 12.9267 2.61716 12.3705 2.84763C11.8143 3.0781 11.3089 3.41589 10.8833 3.84172L9.99994 4.72506L9.1166 3.84172C8.25686 2.98198 7.0908 2.49898 5.87494 2.49898C4.65907 2.49898 3.49301 2.98198 2.63327 3.84172C1.77353 4.70147 1.29053 5.86753 1.29053 7.08339C1.29053 8.29925 1.77353 9.46531 2.63327 10.3251L3.5166 11.2084L9.99994 17.6917L16.4833 11.2084L17.3666 10.3251C17.7924 9.89943 18.1302 9.39407 18.3607 8.83785C18.5912 8.28164 18.7098 7.68546 18.7098 7.08339C18.7098 6.48132 18.5912 5.88514 18.3607 5.32893C18.1302 4.77271 17.7924 4.26735 17.3666 3.84172Z" stroke="#242424" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>\n</svg></button>'}
-    <button class="rating-btn">Give a rating</button>
-  `;
+  handlerVisibility(removeButton, isFavorite);
+  handlerVisibility(addButton, !isFavorite);
 
   const favoritesButton = document.querySelector('.favorites-btn');
   const favoritesContainer = document.getElementById('favorites');
-  favoritesButton.addEventListener('click', function () {
+
+  favoritesButton.addEventListener('click', function (e) {
+    e.stopImmediatePropagation();
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const isFavorite = favorites.find(item => item._id === exercise._id);
+
     if (isFavorite) {
       const removeFavoriteCallback = favoritesContainer
         ? renderFavorites
         : undefined;
       removeFromFavorites(exercise._id, removeFavoriteCallback);
+      handlerVisibility(removeButton, false);
+      handlerVisibility(addButton, true);
     } else {
       addToFavorites(exercise);
+      handlerVisibility(removeButton, true);
+      handlerVisibility(addButton, false);
     }
-    closeModal(); // Закриваємо модальне вікно після додавання/видалення
+    favoritesButton.blur();
   });
 }
 
@@ -308,6 +343,7 @@ function showModal() {
   const modal = document.querySelector('.modal');
   if (modal) {
     modal.classList.add('is-visible');
+    document.addEventListener('keydown', closeModalHandler);
   } else {
     showIziToast('Modal element is missing.', 'Error ❌');
   }
@@ -317,6 +353,7 @@ function closeModal() {
   const modal = document.querySelector('.modal');
   if (modal) {
     modal.classList.remove('is-visible');
+    document.removeEventListener('keydown', closeModalHandler);
   } else {
     showIziToast('Modal element is missing.', 'Error ❌');
   }
@@ -328,7 +365,7 @@ if (closeModalButton) {
 }
 
 // Закриття модального вікна при натисканні за його межами
-document.addEventListener('click', event => {
+document.addEventListener('click', (event) => {
   const modal = document.querySelector('.modal');
   const modalBlock = document.querySelector('.modal__block');
   if (
@@ -341,9 +378,8 @@ document.addEventListener('click', event => {
   }
 });
 
-// Закриття модального вікна при натисканні клавіші Esc
-document.addEventListener('keydown', event => {
+const closeModalHandler = (event) => {
   if (event.key === 'Escape') {
     closeModal();
   }
-});
+}
