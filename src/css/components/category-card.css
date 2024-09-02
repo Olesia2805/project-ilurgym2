@@ -9,6 +9,7 @@
 @media screen and (min-width: 768px) {
   .exercises-grid {
     gap: 32px 15px;
+    align-content: flex-start;
   }
 }
 
